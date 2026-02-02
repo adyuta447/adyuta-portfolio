@@ -4,7 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Refined color palette with softer, more sophisticated tones */
 :root {
   --background: oklch(0.985 0.002 260);
   --foreground: oklch(0.12 0.015 260);
