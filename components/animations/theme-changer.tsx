@@ -7,11 +7,19 @@ import { cn } from "@/lib/utils";
 import { themes, type ThemeColor } from "@/lib/themes";
 
 const STORAGE_KEY = "color-theme";
+const THEME_KEYS: ThemeColor[] = [
+  "golden",
+  "cyan",
+  "purple",
+  "emerald",
+  "rose",
+];
 
 export function ThemeChanger() {
   const [currentTheme, setCurrentTheme] = useState<ThemeColor>("golden");
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { resolvedTheme, systemTheme } = useTheme();
   const themeInitialized = useRef(false);
   const currentThemeRef = useRef<ThemeColor>("emerald");
@@ -20,6 +28,12 @@ export function ThemeChanger() {
     if (themeInitialized.current) return;
 
     setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem(STORAGE_KEY) as ThemeColor;
       if (savedTheme && themes[savedTheme]) {
@@ -31,8 +45,6 @@ export function ThemeChanger() {
       }
     }
     themeInitialized.current = true;
-
-    // Listen for storage changes (e.g., from other tabs) but don't override local changes
     const handleStorageChange = (e: StorageEvent) => {
       if (
         e.key === STORAGE_KEY &&
@@ -44,26 +56,20 @@ export function ThemeChanger() {
       }
     };
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
-
-  // Apply theme whenever resolvedTheme changes - always use ref to avoid state reset issues
   useEffect(() => {
     if (!mounted) return;
-    // Wait for resolvedTheme to be available
     if (resolvedTheme === undefined) return;
-
-    // Verify ref is still valid, and sync with localStorage as fallback
-    // This ensures theme persists even if component remounts or ref gets reset
     let themeToApply = currentThemeRef.current;
 
     if (typeof window !== "undefined") {
       const storedTheme = localStorage.getItem(STORAGE_KEY) as ThemeColor;
-      // If localStorage has a different theme than ref, sync them
-      // This handles edge cases where ref might get reset
       if (storedTheme && themes[storedTheme]) {
         if (storedTheme !== currentThemeRef.current) {
-          // Sync ref and state with localStorage value
           currentThemeRef.current = storedTheme;
           setCurrentTheme(storedTheme);
         }
@@ -71,7 +77,6 @@ export function ThemeChanger() {
       }
     }
 
-    // Apply theme using the verified value
     applyTheme(themeToApply, resolvedTheme);
   }, [mounted, resolvedTheme]); // Only depend on resolvedTheme, not currentTheme
 
@@ -93,18 +98,21 @@ export function ThemeChanger() {
   };
 
   const handleThemeChange = (themeName: ThemeColor) => {
-    // Update ref first to ensure persistence
     currentThemeRef.current = themeName;
-    // Update state for re-render
     setCurrentTheme(themeName);
-    // Persist to localStorage
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEY, themeName);
     }
-    // Apply theme immediately with current mode
     const effectiveMode = resolvedTheme ?? systemTheme ?? "light";
     applyTheme(themeName, effectiveMode);
     setIsOpen(false);
+  };
+
+  const handleMobileColorCycle = () => {
+    const currentIndex = THEME_KEYS.indexOf(currentTheme);
+    const nextIndex = (currentIndex + 1) % THEME_KEYS.length;
+    const nextTheme = THEME_KEYS[nextIndex];
+    handleThemeChange(nextTheme);
   };
 
   if (!mounted) {
@@ -126,12 +134,18 @@ export function ThemeChanger() {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (isMobile) {
+            handleMobileColorCycle();
+          } else {
+            setIsOpen(!isOpen);
+          }
+        }}
         className={cn(
           "group relative flex h-9 w-9 items-center justify-center rounded-lg",
           "text-muted-foreground transition-all duration-300",
           "hover:text-primary hover:bg-primary/10",
-          isOpen && "bg-primary/10 text-primary",
+          isOpen && !isMobile && "bg-primary/10 text-primary",
         )}
         aria-label="Change color theme"
       >
@@ -143,13 +157,14 @@ export function ThemeChanger() {
             "font-mono text-[10px] text-muted-foreground",
             "opacity-0 transition-all duration-200 pointer-events-none shadow-lg",
             "group-hover:opacity-100 group-hover:-bottom-9",
+            isMobile && "hidden",
           )}
         >
           Colors
         </span>
       </button>
 
-      {isOpen && (
+      {isOpen && !isMobile && (
         <>
           <div
             className="fixed inset-0 z-40"
