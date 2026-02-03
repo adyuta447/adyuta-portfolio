@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Github, ExternalLink } from "lucide-react";
 import CertificationsItem from "@/app/data/certifications";
+import Head from "@/components/atoms/head";
 
 export function Certifications() {
   return (
@@ -9,18 +10,11 @@ export function Certifications() {
       className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Work in Progress
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            License & Certifications
-          </h2>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Active experiments and prototypes. Things that are being built,
-            broken, and rebuilt.
-          </p>
-        </div>
+        <Head
+          subtitle="Work in Progress"
+          title="License & Certifications"
+          description="Active experiments and prototypes. Things that are being built, broken, and rebuilt."
+        />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
           <div className="flex items-center gap-3 border-b border-border/50 bg-secondary/40 px-4 sm:px-5 py-3.5 sm:py-4">

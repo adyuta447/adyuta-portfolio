@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Project } from "@/lib/github";
+import Head from "@/components/atoms/head";
 
 interface ProjectsPageContentProps {
   projects: Project[];
@@ -55,23 +56,11 @@ export function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
     <section ref={sectionRef} className="px-4 sm:px-6 py-12 sm:py-20">
       <div className="mx-auto max-w-7xl">
         {/* Hero */}
-        <div
-          className={cn(
-            "mb-12 sm:mb-16 space-y-4 opacity-0",
-            isVisible && "animate-fade-in-up",
-          )}
-        >
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Artifacts
-          </p>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Open Source Projects
-          </h1>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            A collection of tools, experiments, and contributions to the open
-            source community. Built with passion, maintained with care.
-          </p>
-        </div>
+        <Head
+          subtitle="Artifacts"
+          title="Open Source Projects"
+          description="A collection of tools, experiments, and contributions to the open source community. Built with passion, maintained with care."
+        />
 
         {/* Search and Filters */}
         <div
