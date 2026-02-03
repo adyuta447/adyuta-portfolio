@@ -116,17 +116,13 @@ Location: /home/adyuta/
 > system_info
 Operating System: [MacOS Tahoe, 
 Endavour OS, Windows 11]
-CPU: [Apple M4, Intel i3 10100F, 
-Intel i3 3300]
 Web Technologies: [
-React, Next.js, 
-Tailwind CSS, Node.js, 
-TypeScript, SQL, 
-Supabase, Laravel
+React, Next.js, Tailwind CSS, Node.js, SASS,
+TypeScript, SQL, Supabase, Laravel, Webpack
 ]
-Machine Learning: [
-TensorFlow, PyTorch, 
-scikit-learn
+ML & Data Science: [
+Python, Jupyter, Matplotlib, 
+TensorFlow, PyTorch, scikit-learn
 ]
 App Technologies: [React Native, SwiftUI]
                 `}
@@ -139,14 +135,14 @@ Location: /home/adyuta/
 
 > system_info
 Operating System: [MacOS Tahoe, Endavour OS, Windows 11]
-CPU: [Apple M4, Intel i3 10100F, Intel i3 3300]
 Web Technologies: [
-React, Next.js, 
-Tailwind CSS, Node.js, 
-TypeScript, SQL, 
-Supabase, Laravel
+React, Next.js, Tailwind CSS, Node.js, SASS,
+TypeScript, SQL, Supabase, Laravel, Webpack
 ]
-Machine Learning: [TensorFlow, PyTorch, scikit-learn]
+ML & Data Science: [
+Python, Jupyter, Matplotlib, 
+TensorFlow, PyTorch, scikit-learn
+]
 App Technologies: [React Native, SwiftUI]
                  `}</span>
               </pre>
@@ -162,7 +158,7 @@ App Technologies: [React Native, SwiftUI]
               className="absolute -bottom-3 sm:-bottom-6 -left-2 sm:-left-6 rounded-lg border border-border bg-card glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground animate-float"
               style={{ animationDelay: "1s" }}
             >
-              Dec. 2025
+              Jan. 2026
             </div>
 
             <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full bg-primary/5 blur-3xl" />

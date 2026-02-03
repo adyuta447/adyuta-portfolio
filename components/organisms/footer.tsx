@@ -10,7 +10,7 @@ export function Footer() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            <span>Forged with</span>
+            <span>Build with</span>
             <Heart className="h-3.5 w-3.5 text-destructive animate-pulse" />
             <span>& code</span>
           </div>
