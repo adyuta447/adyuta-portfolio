@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import CertificationsItem from "@/app/data/certifications";
 import Link from "next/link";
+import Head from "../atoms/head";
 const display_limit = 5;
 
 export default function Certifications() {
@@ -17,18 +18,11 @@ export default function Certifications() {
       className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Credentials
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            License & Certifications
-          </h2>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Professional certifications and credentials that validate my skills
-            and expertise in various technologies and domains.
-          </p>
-        </div>
+        <Head
+          subtitle="Credentials"
+          title="Certifications"
+          description="Verified credentials showcasing my expertise and commitment to continuous learning in the tech industry."
+        />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
           <div className="flex items-center gap-3 border-b border-border/50 bg-secondary/40 px-4 sm:px-5 py-3.5 sm:py-4">

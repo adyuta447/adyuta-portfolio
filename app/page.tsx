@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/organisms/navbar";
 import { HeroSection } from "@/components/organisms/hero-section";
-import { ProjectsGrid } from "@/components/projects-grid";
-import { LabNotes } from "@/components/lab-notes";
+import { ProjectsGrid } from "@/components/organisms/projects-grid";
+import { LabNotes } from "@/components/organisms/lab-notes";
 import Certifications from "@/components/organisms/certifications";
 import Experiences from "@/components/organisms/experiences";
 import HonorsAwards from "@/components/organisms/honors-awards";
@@ -24,7 +24,7 @@ export default async function Home() {
           <LabNotes />
           <Certifications />
           <HonorsAwards />
-          <ProjectsGrid projects={projects} />
+          <ProjectsGrid projects={projects} showAll={false} limit={6} />
           <Footer />
         </div>
       </main>

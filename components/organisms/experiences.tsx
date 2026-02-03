@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import ExperiencesItem, { Experience } from "@/app/data/experiences";
+import Head from "../atoms/head";
 
 const typeColors: Record<Experience["type"], string> = {
   "full-time": "bg-primary/15 text-primary border-primary/40",
@@ -19,18 +20,11 @@ export default function Experiences() {
       className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Career Journey
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Work Experience
-          </h2>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            My professional journey through various roles and companies,
-            building expertise in front-end development and beyond.
-          </p>
-        </div>
+        <Head
+          subtitle="Professional Journey"
+          title="Experience"
+          description="A chronicle of my professional journey, highlighting key roles, responsibilities, and accomplishments across various organizations."
+        />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
           {/* Terminal Header */}

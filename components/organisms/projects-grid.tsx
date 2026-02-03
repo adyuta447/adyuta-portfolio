@@ -15,7 +15,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
   const [activeFilter, setActiveFilter] = useState("all");
 
   const filteredProjects =
-    activeFilter === "all"
+    activeFilter === "in-progress"
       ? projects
       : projects.filter((p) => p.status === activeFilter);
 
