@@ -4,7 +4,9 @@ import { cn } from "@/lib/utils";
 import { Trophy, Award, ExternalLink, Star } from "lucide-react";
 import HonorsAwardsItem, { HonorAward } from "@/app/data/honors-awards";
 import Head from "../atoms/head";
-import TerminalHeader from "../molecules/terminal/terminal-header";
+import { TerminalCard } from "../molecules/terminal/terminal-card";
+import { TerminalCardContent } from "../molecules/terminal/terminal-content";
+import { TerminalCardFooter } from "../molecules/terminal/terminal-footer";
 
 export default function HonorsAwards() {
   return (
@@ -19,15 +21,13 @@ export default function HonorsAwards() {
           description="Recognition and achievements earned through dedication, innovation, and excellence in various competitions and programs."
         />
 
-        <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
-          <TerminalHeader
-            path="~/adyuta/achievements"
-            statusIcon={<Trophy className="w-3.5 h-3.5 text-yellow-500" />}
-            statusText={`${HonorsAwardsItem.length} awards`}
-          />
-
+        <TerminalCard
+          path="~/adyuta/achievements"
+          statusIcon={<Trophy className="w-3.5 h-3.5 text-yellow-500" />}
+          statusText={`${HonorsAwardsItem.length} awards`}
+        >
           {/* Awards List */}
-          <div className="divide-y divide-border/30">
+          <TerminalCardContent>
             {HonorsAwardsItem.map((item, index) => {
               const content = (
                 <div
@@ -100,10 +100,9 @@ export default function HonorsAwards() {
 
               return content;
             })}
-          </div>
+          </TerminalCardContent>
 
-          {/* Terminal Footer */}
-          <div className="border-t border-border/50 bg-secondary/30 px-4 sm:px-5 py-4">
+          <TerminalCardFooter>
             <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
               <span className="text-primary">❯</span>
               <span className="typing-cursor truncate">
@@ -113,8 +112,8 @@ export default function HonorsAwards() {
                 press enter to run
               </span>
             </div>
-          </div>
-        </div>
+          </TerminalCardFooter>
+        </TerminalCard>
       </div>
     </section>
   );
