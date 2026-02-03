@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import ExperiencesItem, { Experience } from "@/app/data/experiences";
 import Head from "../atoms/head";
+import TerminalHeader from "../molecules/terminal/terminal-header";
 
 const typeColors: Record<Experience["type"], string> = {
   "full-time": "bg-primary/15 text-primary border-primary/40",
@@ -23,27 +24,15 @@ export default function Experiences() {
         <Head
           subtitle="Professional Journey"
           title="Experience"
-          description="A chronicle of my professional journey, highlighting key roles, responsibilities, and accomplishments across various organizations."
+          description="A chronicle of my professional journey, showcasing roles, responsibilities, and accomplishments across various organizations and projects."
         />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
-          {/* Terminal Header */}
-          <div className="flex items-center gap-3 border-b border-border/50 bg-secondary/40 px-4 sm:px-5 py-3.5 sm:py-4">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/60 transition-colors hover:bg-yellow-500 cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-primary/60 transition-colors hover:bg-primary cursor-pointer" />
-            </div>
-            <span className="ml-4 font-mono text-xs text-muted-foreground truncate">
-              ~/adyuta/experience
-            </span>
-            <div className="ml-auto hidden sm:flex items-center gap-2 text-muted-foreground">
-              <Briefcase className="h-3.5 w-3.5 text-primary" />
-              <span className="font-mono text-xs">
-                {ExperiencesItem.length} positions
-              </span>
-            </div>
-          </div>
+          <TerminalHeader
+            path="~/adyuta/experience"
+            statusIcon={<Briefcase className="w-3.5 h-3.5 text-primary" />}
+            statusText={`${ExperiencesItem.length} roles`}
+          />
 
           {/* Experience List */}
           <div className="divide-y divide-border/30">
@@ -139,8 +128,6 @@ export default function Experiences() {
               </div>
             ))}
           </div>
-
-          {/* Terminal Footer */}
           <div className="border-t border-border/50 bg-secondary/30 px-4 sm:px-5 py-4">
             <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
               <span className="text-primary">❯</span>

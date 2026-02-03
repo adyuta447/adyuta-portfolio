@@ -3,6 +3,7 @@ import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import CertificationsItem from "@/app/data/certifications";
 import Link from "next/link";
 import Head from "../atoms/head";
+import TerminalHeader from "../molecules/terminal/terminal-header";
 const display_limit = 5;
 
 export default function Certifications() {
@@ -25,20 +26,13 @@ export default function Certifications() {
         />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
-          <div className="flex items-center gap-3 border-b border-border/50 bg-secondary/40 px-4 sm:px-5 py-3.5 sm:py-4">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/60 transition-colors hover:bg-yellow-500 cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-primary/60 transition-colors hover:bg-primary cursor-pointer" />
-            </div>
-            <span className="ml-4 font-mono text-xs text-muted-foreground truncate">
-              ~/adyuta/certifications
-            </span>
-            <div className="ml-auto hidden sm:flex items-center gap-2 text-muted-foreground">
+          <TerminalHeader
+            path="~/adyuta/certifications"
+            statusIcon={
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="font-mono text-xs">live</span>
-            </div>
-          </div>
+            }
+            statusText="live"
+          />
 
           <div className="divide-y divide-border/30">
             {displayedCertifications.map((item, index) => (

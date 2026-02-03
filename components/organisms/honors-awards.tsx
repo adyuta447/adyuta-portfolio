@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Trophy, Award, ExternalLink, Star } from "lucide-react";
 import HonorsAwardsItem, { HonorAward } from "@/app/data/honors-awards";
 import Head from "../atoms/head";
+import TerminalHeader from "../molecules/terminal/terminal-header";
 
 export default function HonorsAwards() {
   return (
@@ -19,23 +20,11 @@ export default function HonorsAwards() {
         />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
-          {/* Terminal Header */}
-          <div className="flex items-center gap-3 border-b border-border/50 bg-secondary/40 px-4 sm:px-5 py-3.5 sm:py-4">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/60 transition-colors hover:bg-yellow-500 cursor-pointer" />
-              <div className="h-3 w-3 rounded-full bg-primary/60 transition-colors hover:bg-primary cursor-pointer" />
-            </div>
-            <span className="ml-4 font-mono text-xs text-muted-foreground truncate">
-              ~/adyuta/honors-awards
-            </span>
-            <div className="ml-auto hidden sm:flex items-center gap-2 text-muted-foreground">
-              <Trophy className="h-3.5 w-3.5 text-yellow-500" />
-              <span className="font-mono text-xs">
-                {HonorsAwardsItem.length} achievements
-              </span>
-            </div>
-          </div>
+          <TerminalHeader
+            path="~/adyuta/achievements"
+            statusIcon={<Trophy className="w-3.5 h-3.5 text-yellow-500" />}
+            statusText={`${HonorsAwardsItem.length} awards`}
+          />
 
           {/* Awards List */}
           <div className="divide-y divide-border/30">
