@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import Head from "../atoms/head";
 import notes from "@/app/data/lab-notes";
 import Link from "next/link";
 
@@ -15,18 +16,11 @@ export function LabNotes() {
       className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Field Notes
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Lab Notes
-          </h2>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Brief observations, technical findings, and thoughts from the
-            workbench.
-          </p>
-        </div>
+        <Head
+          subtitle="Field Notes"
+          title="Lab Notes"
+          description="Brief observations, technical findings, and thoughts from the workbench."
+        />
 
         <div className="grid gap-5 md:grid-cols-2">
           {notes.map((note, index) => (

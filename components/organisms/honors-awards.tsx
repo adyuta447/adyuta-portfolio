@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Trophy, Award, ExternalLink, Star } from "lucide-react";
 import HonorsAwardsItem, { HonorAward } from "@/app/data/honors-awards";
+import Head from "../atoms/head";
 
 export default function HonorsAwards() {
   return (
@@ -11,18 +12,11 @@ export default function HonorsAwards() {
       className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-            Recognition
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Honors & Awards
-          </h2>
-          <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Recognition and achievements earned through dedication, innovation,
-            and excellence in various competitions and programs.
-          </p>
-        </div>
+        <Head
+          subtitle="Recognition"
+          title="Honors & Awards"
+          description="Recognition and achievements earned through dedication, innovation, and excellence in various competitions and programs."
+        />
 
         <div className="rounded-xl border border-border bg-card/40 glass backdrop-blur-sm overflow-hidden hover-lift animate-scale-in stagger-2">
           {/* Terminal Header */}
