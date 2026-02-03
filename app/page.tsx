@@ -24,7 +24,7 @@ export default async function Home() {
           <LabNotes />
           <Certifications />
           <HonorsAwards />
-          <ProjectsGrid projects={projects} />
+          <ProjectsGrid projects={projects} showAll={false} limit={6} />
           <Footer />
         </div>
       </main>
