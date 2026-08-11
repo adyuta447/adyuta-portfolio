@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { X, Minus, Plus } from "lucide-react";
+import skills from "@/app/data/skills";
 
 const roles = [
   "Front-End Engineer",
@@ -44,8 +45,8 @@ export function HeroSection() {
   return (
     <section className="relative px-4 grid-bg sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center lg:min-h-[70vh]">
-          <div className="space-y-8 sm:space-y-10">
+        <div className="grid min-w-0 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center lg:min-h-[70vh]">
+          <div className="min-w-0 space-y-8 sm:space-y-10">
             <div className="space-y-3 animate-fade-in-up">
               <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
                 Hi, my name is
@@ -87,7 +88,7 @@ export function HeroSection() {
           </div>
 
           {/* Right column - ASCII Art / Visual */}
-          <div className="relative animate-scale-in stagger-4">
+          <div className="relative min-w-0 animate-scale-in stagger-4">
             <div className="relative rounded-xl border border-border bg-black p-5 sm:p-8 hover-lift">
               {/* Terminal header dots */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
@@ -105,46 +106,23 @@ export function HeroSection() {
                 terminal://adyuta
               </div>
 
-              <pre className="mt-6 overflow-hidden font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
-                <span className="sm:hidden">
-                  {`
+              <pre className="mt-6 overflow-hidden whitespace-pre-wrap wrap-break-word font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
+                {`
 Neon Terminal - version 1.0.0
 ===========================
 User: adyuta
 Location: /home/adyuta/
 
 > system_info
-Operating System: [MacOS Tahoe, 
-Endavour OS, Windows 11]
+Operating System: [${skills.operatingSystems.join(", ")}]
 Web Technologies: [
-React, Next.js, Tailwind CSS, Node.js, SASS,
-TypeScript, SQL, Supabase, Laravel, Webpack
+${skills.webTechnologies.join(", ")}
 ]
 ML & Data Science: [
-Python, Jupyter, Matplotlib, 
-TensorFlow, PyTorch, scikit-learn
+${skills.mlDataScience.join(", ")}
 ]
-App Technologies: [React Native, SwiftUI]
+App Technologies: [${skills.appTechnologies.join(", ")}]
                 `}
-                </span>
-                <span className="hidden sm:block">{`
-Neon Terminal - version 1.0.0
-===========================
-User: adyuta
-Location: /home/adyuta/
-
-> system_info
-Operating System: [MacOS Tahoe, Endavour OS, Windows 11]
-Web Technologies: [
-React, Next.js, Tailwind CSS, Node.js, SASS,
-TypeScript, SQL, Supabase, Laravel, Webpack
-]
-ML & Data Science: [
-Python, Jupyter, Matplotlib, 
-TensorFlow, PyTorch, scikit-learn
-]
-App Technologies: [React Native, SwiftUI]
-                 `}</span>
               </pre>
             </div>
 

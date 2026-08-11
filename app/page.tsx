@@ -3,7 +3,9 @@ import { HeroSection } from "@/components/organisms/hero-section";
 import { ProjectsGrid } from "@/components/organisms/projects-grid";
 import { LabNotes } from "@/components/organisms/lab-notes";
 import Certifications from "@/components/organisms/certifications";
+import Education from "@/components/organisms/education";
 import Experiences from "@/components/organisms/experiences";
+import OrganizationalExperience from "@/components/organisms/organizational-experience";
 import HonorsAwards from "@/components/organisms/honors-awards";
 import { Footer } from "@/components/organisms/footer";
 import { CursorGlow } from "@/components/animations/cursor-glow";
@@ -20,7 +22,9 @@ export default async function Home() {
         <div className="relative z-10">
           <Navbar />
           <HeroSection />
+          <Education />
           <Experiences />
+          <OrganizationalExperience />
           <LabNotes />
           <Certifications />
           <HonorsAwards />

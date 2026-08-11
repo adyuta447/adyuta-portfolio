@@ -17,12 +17,11 @@ export default function IntroductionPage() {
             </div>
 
             <p className="text-base sm:text-lg leading-relaxed text-muted-foreground max-w-3xl">
-              Co-founder & Lead Engineer at Arkakode, a digital agency crafting
-              meaningful digital experiences. I specialize in building fast,
-              reliable, and modern web applications with a focus on scalability
-              and user experience. Proficient in React.js, Next.js, TypeScript,
-              and the full stack, I transform ideas into production-ready
-              solutions.
+              Front-end engineer with six years building web products, now
+              pushing into machine learning and MLOps. I co-founded CV.
+              Digital Awan Nusantara, where I split my time between shipping
+              React and Next.js interfaces and getting ML models out of
+              notebooks and into production.
             </p>
           </div>
         </div>
@@ -37,31 +36,36 @@ export default function IntroductionPage() {
                 About Adyuta
               </p>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Full-Stack Builder & Digital Innovator
+                Where Front-End Meets Machine Learning
               </h2>
             </div>
 
             <div className="space-y-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
               <p>
-                This portfolio is a showcase of my journey as a developer and
-                entrepreneur. It reflects my passion for building impactful
-                digital solutions, from commercial projects at Arkakode to
-                open-source contributions and experimental prototypes.
+                My day-to-day work is mostly front-end: React, Next.js, PWAs,
+                Tailwind, and Shadcn UI, built on Turbopack. I care about
+                performance and architecture as much as how something looks,
+                and a background in cybersecurity means I think about data
+                handling and attack surface before I ship, not after.
               </p>
 
               <p>
-                I believe in the power of clean code, thoughtful design, and
-                continuous innovation. Whether it&apos;s developing a gaming
-                top-up platform, disaster management systems, or e-commerce
-                solutions, I approach every project with the goal of delivering
-                real value to users.
+                Over the past while I&apos;ve been teaching myself the machine
+                learning side properly: preprocessing, feature engineering,
+                training and evaluating models, then the less glamorous part
+                of actually running them, serving through FastAPI or Flask,
+                packaging with Docker, tracking experiments in MLflow, and
+                keeping an eye on things in production with Prometheus and
+                Grafana.
               </p>
 
               <p>
-                This space documents my technical experiments, lab notes, and
-                real-world projects. It&apos;s a window into my creative
-                process, problem-solving approach, and commitment to building
-                the future of the web.
+                At CV. Digital Awan Nusantara I&apos;m not just writing code.
+                I handle the financial side, client relationships, and product
+                decisions too, which forces me to weigh engineering choices
+                against what the business can actually sustain. The direction
+                I&apos;m working toward is systems where the ML isn&apos;t a
+                bolt-on demo but genuinely part of the product.
               </p>
             </div>
           </div>

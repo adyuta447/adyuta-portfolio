@@ -124,30 +124,33 @@ export default function CertificationsPage() {
                   Recent Achievements
                 </h3>
                 <div className="space-y-3">
-                  {recentAchievements.map((cert, index) => (
-                    <a
-                      key={cert.id}
-                      href={cert.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-start gap-3 text-xs group hover:bg-secondary/20 rounded-md p-1 -m-1 transition-colors"
-                    >
-                      <span className="shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 bg-primary" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-foreground truncate group-hover:text-primary transition-colors">
-                          {cert.name}
-                        </p>
-                        <p className="text-muted-foreground flex items-center gap-1">
-                          <span className="text-primary/70">
-                            {cert.nameCompany}
-                          </span>
-                          <span className="mx-1">·</span>
-                          <Clock className="h-3 w-3" />
-                          {cert.dateRelease}
-                        </p>
-                      </div>
-                    </a>
-                  ))}
+                  {recentAchievements.map((cert) => {
+                    const Tag = cert.url ? "a" : "div";
+                    return (
+                      <Tag
+                        key={cert.id}
+                        href={cert.url}
+                        target={cert.url ? "_blank" : undefined}
+                        rel={cert.url ? "noopener noreferrer" : undefined}
+                        className="flex items-start gap-3 text-xs group hover:bg-secondary/20 rounded-md p-1 -m-1 transition-colors"
+                      >
+                        <span className="shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 bg-primary" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-foreground truncate group-hover:text-primary transition-colors">
+                            {cert.name}
+                          </p>
+                          <p className="text-muted-foreground flex items-center gap-1">
+                            <span className="text-primary/70">
+                              {cert.nameCompany}
+                            </span>
+                            <span className="mx-1">·</span>
+                            <Clock className="h-3 w-3" />
+                            {cert.dateRelease}
+                          </p>
+                        </div>
+                      </Tag>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -177,50 +180,78 @@ export default function CertificationsPage() {
                 </div>
 
                 <div className="divide-y divide-border/30">
-                  {certifications.map((item, index) => (
-                    <a
-                      key={item.id}
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        "group flex flex-col gap-2 sm:gap-4 p-4 sm:p-6 transition-all duration-300 sm:flex-row sm:items-center sm:justify-between opacity-0",
-                        isVisible && "animate-fade-in",
-                        hoveredItem === item.id && "bg-secondary/30",
-                      )}
-                      style={{ animationDelay: `${index * 80 + 300}ms` }}
-                      onMouseEnter={() => setHoveredItem(item.id)}
-                      onMouseLeave={() => setHoveredItem(null)}
-                    >
-                      <div className="flex-1 space-y-1.5 sm:space-y-2 min-w-0">
-                        <div className="flex items-start sm:items-center gap-2 sm:gap-3">
-                          <span className="text-primary font-mono text-sm shrink-0 transition-transform duration-300 group-hover:translate-x-1 mt-0.5 sm:mt-0">
-                            $
-                          </span>
-                          <h4 className="font-mono text-xs sm:text-sm font-medium tracking-tight transition-colors group-hover:text-gradient line-clamp-2 sm:truncate">
-                            {item.name}
-                          </h4>
-                          <div className="hidden sm:flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                  {certifications.map((item, index) => {
+                    const cardClassName = cn(
+                      "group flex flex-col gap-2 sm:gap-4 p-4 sm:p-6 transition-all duration-300 sm:flex-row sm:items-center sm:justify-between opacity-0",
+                      isVisible && "animate-fade-in",
+                      hoveredItem === item.id && "bg-secondary/30",
+                    );
+                    const cardStyle = {
+                      animationDelay: `${index * 80 + 300}ms`,
+                    };
+                    const cardContent = (
+                      <>
+                        <div className="flex-1 space-y-1.5 sm:space-y-2 min-w-0">
+                          <div className="flex items-start sm:items-center gap-2 sm:gap-3">
+                            <span className="text-primary font-mono text-sm shrink-0 transition-transform duration-300 group-hover:translate-x-1 mt-0.5 sm:mt-0">
+                              $
+                            </span>
+                            <h4 className="font-mono text-xs sm:text-sm font-medium tracking-tight transition-colors group-hover:text-gradient line-clamp-2 sm:truncate">
+                              {item.name}
+                            </h4>
+                            {item.url && (
+                              <div className="hidden sm:flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex items-center justify-between pl-5 sm:pl-6">
+                            <p className="text-[11px] sm:text-xs text-muted-foreground line-clamp-1">
+                              {item.nameCompany}
+                            </p>
+                            <span className="font-mono text-[10px] sm:text-xs text-muted-foreground shrink-0 ml-2 sm:hidden">
+                              {item.dateRelease}
+                            </span>
                           </div>
                         </div>
-                        <div className="flex items-center justify-between pl-5 sm:pl-6">
-                          <p className="text-[11px] sm:text-xs text-muted-foreground line-clamp-1">
-                            {item.nameCompany}
-                          </p>
-                          <span className="font-mono text-[10px] sm:text-xs text-muted-foreground shrink-0 ml-2 sm:hidden">
+
+                        <div className="hidden sm:flex items-center justify-between gap-6 pl-6 sm:pl-0 sm:justify-end">
+                          <span className="font-mono text-xs text-muted-foreground shrink-0">
                             {item.dateRelease}
                           </span>
                         </div>
-                      </div>
+                      </>
+                    );
 
-                      <div className="hidden sm:flex items-center justify-between gap-6 pl-6 sm:pl-0 sm:justify-end">
-                        <span className="font-mono text-xs text-muted-foreground shrink-0">
-                          {item.dateRelease}
-                        </span>
-                      </div>
-                    </a>
-                  ))}
+                    if (!item.url) {
+                      return (
+                        <div
+                          key={item.id}
+                          className={cardClassName}
+                          style={cardStyle}
+                          onMouseEnter={() => setHoveredItem(item.id)}
+                          onMouseLeave={() => setHoveredItem(null)}
+                        >
+                          {cardContent}
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={item.id}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cardClassName}
+                        style={cardStyle}
+                        onMouseEnter={() => setHoveredItem(item.id)}
+                        onMouseLeave={() => setHoveredItem(null)}
+                      >
+                        {cardContent}
+                      </a>
+                    );
+                  })}
                 </div>
 
                 <div className="border-t border-border/50 bg-secondary/30 px-4 sm:px-5 py-3 sm:py-4">
