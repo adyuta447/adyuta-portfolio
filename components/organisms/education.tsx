@@ -1,11 +1,16 @@
 "use client";
 
-import { GraduationCap, MapPin, Calendar } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { MapPin } from "lucide-react";
 import EducationItem from "@/app/data/education";
 import Head from "../atoms/head";
-import { TerminalCard } from "../molecules/terminal/terminal-card";
-import { TerminalCardContent } from "../molecules/terminal/terminal-content";
-import { TerminalCardFooter } from "../molecules/terminal/terminal-footer";
+
+const CURRENT_YEAR = new Date().getFullYear();
+
+// Newest first, matching how the Experience section reads.
+const sortedEducation = [...EducationItem].sort(
+  (a, b) => parseInt(b.startDate, 10) - parseInt(a.startDate, 10),
+);
 
 export default function Education() {
   return (
@@ -17,66 +22,58 @@ export default function Education() {
         <Head
           subtitle="Background"
           title="Education"
-          description="Formal education and academic background."
+          description="Where the formal training happened, from science-track high school to an informatics degree."
         />
 
-        <TerminalCard
-          path="~/adyuta/education"
-          statusIcon={<GraduationCap className="w-3.5 h-3.5 text-primary" />}
-          statusText={`${EducationItem.length} schools`}
-        >
-          <TerminalCardContent>
-            {EducationItem.map((item, index) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:gap-6">
+          {sortedEducation.map((item, index) => {
+            const isOngoing = parseInt(item.endDate, 10) > CURRENT_YEAR;
+
+            return (
               <div
                 key={item.id}
-                className="group relative p-5 sm:p-6 transition-all duration-300 hover:bg-secondary/30 animate-fade-in"
-                style={{ animationDelay: `${index * 100 + 400}ms` }}
+                className={cn(
+                  "group relative overflow-hidden rounded-xl border border-border bg-card/40 glass backdrop-blur-sm p-5 sm:p-6 transition-colors duration-300 hover-lift animate-fade-in",
+                  isOngoing ? "hover:border-primary/50" : "hover:border-border",
+                )}
+                style={{ animationDelay: `${index * 120 + 200}ms` }}
               >
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/50 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex-1 space-y-3 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                      <span className="text-primary font-mono text-sm shrink-0 transition-transform duration-300 group-hover:translate-x-1">
-                        $
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                    {item.startDate} — {item.endDate}
+                  </span>
+                  {isOngoing ? (
+                    <span className="flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-primary">
+                        Ongoing
                       </span>
-                      <h4 className="font-mono text-sm sm:text-base font-medium tracking-tight transition-colors group-hover:text-primary">
-                        {item.school}
-                      </h4>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 pl-5 sm:pl-6 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1.5">
-                        <MapPin className="h-3 w-3" />
-                        {item.location}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <Calendar className="h-3 w-3" />
-                        {item.startDate} — {item.endDate}
-                      </span>
-                    </div>
-
-                    <p className="pl-5 sm:pl-6 text-sm text-muted-foreground leading-relaxed">
-                      {item.degree}
-                    </p>
-                  </div>
+                    </span>
+                  ) : (
+                    <span className="rounded-md border border-border/60 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                      Graduated
+                    </span>
+                  )}
                 </div>
-              </div>
-            ))}
-          </TerminalCardContent>
 
-          <TerminalCardFooter>
-            <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-              <span className="text-primary">❯</span>
-              <span className="typing-cursor truncate">
-                cat education.json
-              </span>
-              <span className="ml-auto text-primary/50 hidden sm:block">
-                press enter to run
-              </span>
-            </div>
-          </TerminalCardFooter>
-        </TerminalCard>
+                <h3 className="mt-4 text-lg font-bold tracking-tight transition-colors duration-300 group-hover:text-primary">
+                  {item.school}
+                </h3>
+
+                <p className="mt-1.5 text-sm text-foreground/80">
+                  {item.degree}
+                </p>
+
+                <p className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+                  <MapPin className="h-3 w-3" />
+                  {item.location}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

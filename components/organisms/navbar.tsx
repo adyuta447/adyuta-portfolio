@@ -69,11 +69,6 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Portaled to <body>: the page wraps everything in <main class="scanlines">,
-  // whose ::before overlay sits at z-index 100 and would otherwise paint its
-  // stripes straight over this menu. Escaping that subtree also keeps the menu
-  // clear of the header's backdrop-filter, which would otherwise become the
-  // containing block for a fixed child and collapse it to the header's height.
   const mobileMenu = (
     <div
       className={cn(
@@ -123,8 +118,6 @@ export function Navbar() {
             <item.icon className="h-4 w-4 shrink-0" />
             <span>{item.label}</span>
             {isActive(item.href) && (
-              /* Reuses the site's blinking terminal cursor, same motif as the
-                 hero typewriter and the terminal card footers. */
               <span className="typing-cursor ml-auto" />
             )}
           </Link>

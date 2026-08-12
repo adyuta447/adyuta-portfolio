@@ -51,7 +51,7 @@ export function HeroSection() {
               <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
                 Hi, my name is
               </p>
-              <h1 className="text-2xl font-bold tracking-tight bg-white dark:bg-black sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
+              <h1 className="text-2xl font-bold tracking-tight bg-background sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
                 Jan Agra Adyuta Harnowo
               </h1>
               <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
@@ -89,7 +89,7 @@ export function HeroSection() {
 
           {/* Right column - ASCII Art / Visual */}
           <div className="relative min-w-0 animate-scale-in stagger-4">
-            <div className="relative rounded-xl border border-border bg-black p-5 sm:p-8 hover-lift">
+            <div className="relative rounded-xl border border-border bg-[#141a22] p-5 sm:p-8 hover-lift">
               {/* Terminal header dots */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive flex items-center justify-center">
