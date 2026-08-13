@@ -11,6 +11,7 @@ import organizations, {
 import honorsAwards, { type HonorAward } from "@/app/data/honors-awards";
 import certifications from "@/app/data/certifications";
 import skills from "@/app/data/skills";
+import { toBullets } from "@/lib/utils";
 import { ResumePrintButton } from "@/components/molecules/resume/print-button";
 import {
   ResumeDocument,
@@ -129,14 +130,6 @@ function credentialIdFromUrl(url?: string): string | null {
   } catch {
     return null;
   }
-}
-
-function toBullets(text: string): string[] {
-  return text
-    .split(/\.\s+/)
-    .map((sentence) => sentence.trim())
-    .filter(Boolean)
-    .map((sentence) => (sentence.endsWith(".") ? sentence : `${sentence}.`));
 }
 
 // Fixed point sizes on purpose: this is a facsimile of a printed document,

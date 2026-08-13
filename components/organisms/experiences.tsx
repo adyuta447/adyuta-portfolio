@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, toBullets } from "@/lib/utils";
 import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import ExperiencesItem, { Experience } from "@/app/data/experiences";
 import Head from "../atoms/head";
@@ -106,9 +106,11 @@ export default function Experiences() {
                         {item.startDate} — {item.endDate}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
+                    <ul className="ml-4 list-disc space-y-1.5 text-sm text-muted-foreground leading-relaxed marker:text-primary/50">
+                      {toBullets(item.description).map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
                     <div className="flex flex-wrap gap-2 pt-1">
                       {item.technologies.map((tech) => (
                         <span
