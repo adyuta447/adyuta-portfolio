@@ -62,46 +62,9 @@ const sortedCertifications = RESUME_CERTIFICATION_IDS.map((id) =>
       parseCertDate(b.dateRelease).getTime(),
   );
 
-// Resume-only trims: the site's Experience section keeps full detail, but a
-// printed CV needs to fit ~2 pages. Ether Linux's two roles get merged into
-// one non-repetitive entry, and Maltéve's bullets get tightened, without
-// touching the canonical experience data in app/data/experiences.ts.
-const resumeExperiences: Experience[] = (() => {
-  const etherLinuxPM = experiences.find((item) => item.id === 4);
-  const etherLinuxFrontend = experiences.find((item) => item.id === 5);
-
-  const etherLinuxMerged: Experience | null =
-    etherLinuxPM && etherLinuxFrontend
-      ? {
-          ...etherLinuxPM,
-          role: "Project Manager & Frontend Developer",
-          startDate: etherLinuxFrontend.startDate,
-          description:
-            "Led planning, risk management, and team coordination for the Ether Linux operating system project, keeping a distributed volunteer team aligned on scope and deadlines across a 3-year build. Built and maintained the project's front-end with React, Next.js, and TypeScript, turning community design input into a responsive, production website. Balanced project leadership with hands-on front-end delivery to ship the OS release on schedule.",
-          technologies: Array.from(
-            new Set([
-              ...etherLinuxPM.technologies,
-              ...etherLinuxFrontend.technologies,
-            ]),
-          ),
-        }
-      : null;
-
-  const trimmedDescriptions: Record<number, string> = {
-    1: "Directing end-to-end development of web and mobile applications with a focus on robust Front-End architecture and user-centric design. Researching and prototyping efficient tech stacks to keep product offerings fast and competitive.",
-    2: "Managed full-cycle company finances, including cash flow, P&L reporting, and tax compliance, while leading hands-on UAT to keep deliverables at a high quality bar before launch. Executed lean digital marketing strategies that grew customer engagement and ROI with limited resources.",
-    3: "Managed digital marketing and e-commerce operations across Shopee and TikTok Shop, maintaining a 5.0 seller rating. Grew the brand's Instagram presence past 8K engagements while shaping its elegant, exclusive positioning through digital ad campaigns.",
-  };
-
-  return experiences
-    .filter((item) => item.id !== 4 && item.id !== 5)
-    .map((item) =>
-      trimmedDescriptions[item.id]
-        ? { ...item, description: trimmedDescriptions[item.id] }
-        : item,
-    )
-    .concat(etherLinuxMerged ? [etherLinuxMerged] : []);
-})();
+// Rendered straight from app/data/experiences.ts — the same source the site's
+// Experience section reads, so editing a role's copy updates both surfaces.
+const resumeExperiences: Experience[] = experiences;
 
 const resumeOrganizations = organizations;
 
