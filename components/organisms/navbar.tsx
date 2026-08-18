@@ -103,7 +103,9 @@ export function Navbar() {
             href={item.href}
             onClick={() => setIsMobileMenuOpen(false)}
             style={{
-              transitionDelay: isMobileMenuOpen ? `${index * 40 + 100}ms` : "0ms",
+              transitionDelay: isMobileMenuOpen
+                ? `${index * 40 + 100}ms`
+                : "0ms",
             }}
             className={cn(
               "flex items-center gap-4 border-b border-border/40 py-5 font-mono text-base uppercase tracking-widest transition-all duration-300",
@@ -117,9 +119,7 @@ export function Navbar() {
           >
             <item.icon className="h-4 w-4 shrink-0" />
             <span>{item.label}</span>
-            {isActive(item.href) && (
-              <span className="typing-cursor ml-auto" />
-            )}
+            {isActive(item.href) && <span className="typing-cursor ml-auto" />}
           </Link>
         ))}
       </nav>
@@ -151,7 +151,7 @@ export function Navbar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span>status: building</span>
+          <span>status: available</span>
         </div>
       </div>
     </div>
