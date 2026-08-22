@@ -33,7 +33,7 @@ const ExperiencesItem: Experience[] = [
       "React Native",
       "Laravel",
       "CI/CD",
-      "Graphql",
+      "GraphQL",
     ],
     url: "https://arkakode.com",
   },

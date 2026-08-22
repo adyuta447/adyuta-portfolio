@@ -11,14 +11,14 @@ const CertificationsItem: Certification[] = [
   {
     id: 1,
     name: "Command Line Course",
-    nameCompany: "Prograte",
+    nameCompany: "Progate",
     dateRelease: "Dec 2020",
     url: "https://progate.com/course_certificate/6ec1501eql9ouy",
   },
   {
     id: 2,
     name: "HTML & CSS Course",
-    nameCompany: "Prograte",
+    nameCompany: "Progate",
     dateRelease: "Dec 2020",
     url: "https://progate.com/course_certificate/0ef7bc73qko3iq",
   },
@@ -41,14 +41,14 @@ const CertificationsItem: Certification[] = [
   {
     id: 5,
     name: "Git Course",
-    nameCompany: "Prograte",
+    nameCompany: "Progate",
     dateRelease: "Jan 2021",
     url: "https://progate.com/course_certificate/40212719qmk0r4",
   },
   {
     id: 6,
     name: "Node JS Development",
-    nameCompany: "Prograte",
+    nameCompany: "Progate",
     dateRelease: "Jan 2021",
     url: "https://progate.com/path_certificate/7fef8a3bqk3e91",
   },

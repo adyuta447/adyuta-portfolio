@@ -1,10 +1,10 @@
 "use client";
-import Certifications from "@/components/organisms/certifications";
-import type { Metadata } from "next";
 import { useState, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { Github, ExternalLink, Clock, Activity } from "lucide-react";
+import { ExternalLink, Clock, Activity, ListFilter } from "lucide-react";
 import certifications from "@/app/data/certifications";
+import { getProvider } from "@/app/data/cert-providers";
+import { ProviderFilter } from "@/components/public/certifications/provider-filter";
 
 const parseDate = (dateStr: string) => {
   const [month, year] = dateStr.split(" ");
@@ -32,13 +32,38 @@ const recentAchievements = [...certifications]
   )
   .slice(0, 4);
 
+/** Providers present in the data, busiest first. */
+const providerCounts = Object.entries(
+  certifications.reduce<Record<string, number>>((counts, cert) => {
+    counts[cert.nameCompany] = (counts[cert.nameCompany] ?? 0) + 1;
+    return counts;
+  }, {}),
+)
+  .map(([nameCompany, count]) => ({ nameCompany, count }))
+  .sort(
+    (a, b) =>
+      b.count - a.count ||
+      getProvider(a.nameCompany).label.localeCompare(
+        getProvider(b.nameCompany).label,
+      ),
+  );
+
 export default function CertificationsPage() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [activeProvider, setActiveProvider] = useState<string | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const visibleCertifications = useMemo(
+    () =>
+      activeProvider
+        ? certifications.filter((cert) => cert.nameCompany === activeProvider)
+        : certifications,
+    [activeProvider],
+  );
 
   return (
     <div className="pt-24">
@@ -88,7 +113,7 @@ export default function CertificationsPage() {
                   </div>
                   <div className="text-center p-2.5 sm:p-3 rounded-lg bg-secondary/30">
                     <p className="text-xl sm:text-2xl font-bold text-primary">
-                      {new Set(certifications.map((c) => c.nameCompany)).size}
+                      {providerCounts.length}
                     </p>
                     <p className="font-mono text-[10px] sm:text-xs text-muted-foreground">
                       Providers
@@ -153,6 +178,36 @@ export default function CertificationsPage() {
                   })}
                 </div>
               </div>
+
+              {/* Provider filter */}
+              <div
+                className={cn(
+                  "rounded-xl border border-border bg-card/40 glass p-4 sm:p-5 opacity-0",
+                  isVisible && "animate-fade-in-up stagger-5",
+                )}
+              >
+                <div className="mb-3 sm:mb-4 flex items-center justify-between gap-3">
+                  <h3 className="font-mono text-xs uppercase tracking-wider text-primary flex items-center gap-2">
+                    <ListFilter className="h-3.5 w-3.5" />
+                    Providers
+                  </h3>
+                  {activeProvider && (
+                    <button
+                      type="button"
+                      onClick={() => setActiveProvider(null)}
+                      className="font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      reset
+                    </button>
+                  )}
+                </div>
+                <ProviderFilter
+                  providers={providerCounts}
+                  total={certifications.length}
+                  active={activeProvider}
+                  onChange={setActiveProvider}
+                />
+              </div>
             </div>
 
             {/* Main Terminal */}
@@ -180,14 +235,16 @@ export default function CertificationsPage() {
                 </div>
 
                 <div className="divide-y divide-border/30">
-                  {certifications.map((item, index) => {
+                  {visibleCertifications.map((item, index) => {
                     const cardClassName = cn(
                       "group flex flex-col gap-2 sm:gap-4 p-4 sm:p-6 transition-all duration-300 sm:flex-row sm:items-center sm:justify-between opacity-0",
                       isVisible && "animate-fade-in",
                       hoveredItem === item.id && "bg-secondary/30",
                     );
+                    // Capped so rows revealed by a filter change never sit
+                    // invisible while a long stagger queue plays out.
                     const cardStyle = {
-                      animationDelay: `${index * 80 + 300}ms`,
+                      animationDelay: `${Math.min(index, 8) * 60 + 200}ms`,
                     };
                     const cardContent = (
                       <>
@@ -258,10 +315,12 @@ export default function CertificationsPage() {
                   <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
                     <span className="text-primary">❯</span>
                     <span className="typing-cursor truncate">
-                      cat certifications.md
+                      {activeProvider
+                        ? `grep "${getProvider(activeProvider).label}" certifications.md`
+                        : "cat certifications.md"}
                     </span>
-                    <span className="ml-auto text-primary/50 hidden sm:block">
-                      press enter to run
+                    <span className="ml-auto shrink-0 tabular-nums">
+                      {visibleCertifications.length} / {certifications.length}
                     </span>
                   </div>
                 </div>
