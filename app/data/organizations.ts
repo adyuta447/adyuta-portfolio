@@ -10,21 +10,24 @@ export interface OrganizationExperience {
 const OrganizationsItem: OrganizationExperience[] = [
   {
     id: 1,
-    organization: "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
+    organization:
+      "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
     role: "Staff of Competition Division (Web Development), ITechno Cup 2026",
     startDate: "May 2026",
     endDate: "Present",
   },
   {
     id: 2,
-    organization: "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
+    organization:
+      "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
     role: "Staff of Finance Division, Satu Aksi Untuk Masyarakat 2026",
     startDate: "Apr 2026",
-    endDate: "Present",
+    endDate: "Aug 2026",
   },
   {
     id: 3,
-    organization: "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
+    organization:
+      "Himpunan Mahasiswa Teknik Informatika dan Komputer PNJ (HIMATIK PNJ)",
     role: "Staff of Funds & Sponsorship Division, TIKGAMES 2026",
     startDate: "Apr 2026",
     endDate: "Jul 2026",

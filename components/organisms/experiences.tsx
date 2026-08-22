@@ -46,10 +46,6 @@ export default function Experiences() {
               >
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/50 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* The `$` is a fixed gutter rather than a flex sibling of the
-                    title: as a sibling it wraps as its own unit, stranding the
-                    prompt on one line and the badge on another once a long role
-                    name no longer fits beside it. */}
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-primary font-mono text-sm sm:text-base shrink-0 transition-transform duration-300 group-hover:translate-x-1">
                     $
