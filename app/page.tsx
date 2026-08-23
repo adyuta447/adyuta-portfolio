@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/organisms/navbar";
 import { HeroSection } from "@/components/organisms/hero-section";
+import TechStack from "@/components/organisms/tech-stack";
 import { ProjectsGrid } from "@/components/organisms/projects-grid";
 import { LabNotes } from "@/components/organisms/lab-notes";
 import Certifications from "@/components/organisms/certifications";
@@ -22,6 +23,7 @@ export default async function Home() {
         <div className="relative z-10">
           <Navbar />
           <HeroSection />
+          <TechStack />
           <Education />
           <Experiences />
           <OrganizationalExperience />

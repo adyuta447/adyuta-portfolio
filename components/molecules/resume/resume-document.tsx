@@ -14,9 +14,6 @@ export interface ResumeBlock {
   node: ReactNode;
 }
 
-// A4 at the CSS reference pixel ratio (96px = 1in = 25.4mm) — the same
-// ratio the browser's own print engine uses, so JS measurements taken on
-// screen line up with what actually gets printed.
 const MM_TO_PX = 96 / 25.4;
 const PAGE_HEIGHT_MM = 297;
 const PAGE_MARGIN_Y_MM = 12;

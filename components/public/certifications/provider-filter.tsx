@@ -25,7 +25,6 @@ const tileClass = (isActive: boolean) =>
       : "border-border/60 bg-secondary/20 hover:border-foreground/30 hover:bg-secondary/50",
   );
 
-/** Stand-in plate for providers that ship no artwork — same footprint as a logo. */
 const FallbackPlate = ({
   label,
   isActive,

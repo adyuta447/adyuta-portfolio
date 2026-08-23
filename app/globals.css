@@ -378,6 +378,33 @@
   animation: gradient-shift 4s ease infinite;
 }
 
+/* Auto-scrolling logo strip. The track holds two identical halves and every
+   item carries its own right margin, so a -50% shift lands exactly on the
+   starting frame and the loop reads as continuous. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee var(--marquee-duration, 30s) linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
+
 /* Stagger animation delays */
 .stagger-1 {
   animation-delay: 0.1s;

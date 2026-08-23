@@ -439,6 +439,14 @@ const CertificationsItem: Certification[] = [
     credentialId: "RVZK0D0LNZD5",
     url: "https://www.dicoding.com/certificates/RVZK0D0LNZD5",
   },
+  {
+    id: 56,
+    name: "Memulai Pemrograman Dengan Swift",
+    nameCompany: "Dicoding Indonesia",
+    dateRelease: "Aug 2026",
+    credentialId: "98XW86970PM3",
+    url: "https://www.dicoding.com/certificates/98XW86970PM3",
+  },
 ];
 
 export default CertificationsItem;

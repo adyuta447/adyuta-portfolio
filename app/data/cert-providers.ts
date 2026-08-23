@@ -1,18 +1,9 @@
 export interface CertProvider {
-  /** Short name for chips, tooltips and screen readers. */
   label: string;
-  /** Path under /public. Providers without artwork fall back to the label. */
   logo?: string;
-  /**
-   * Set when the artwork ships with its own baked background: it then fills the
-   * plate edge to edge and becomes the tile itself. Transparent or white-matted
-   * logos leave this off and sit on a white plate with padding, otherwise their
-   * dark lettering disappears in dark mode.
-   */
   bleed?: boolean;
 }
 
-/** Keyed by `Certification["nameCompany"]`. */
 const providers: Record<string, CertProvider> = {
   "Dicoding Indonesia": {
     label: "Dicoding",
@@ -56,10 +47,12 @@ const providers: Record<string, CertProvider> = {
     logo: "/cert-logos/codepolitan.jpg",
     bleed: true,
   },
-  Cisco: { label: "Cisco" },
+  Cisco: {
+    label: "Cisco",
+    logo: "/cert-logos/cisco.png",
+  },
 };
 
-/** Falls back to the raw company name so new data renders without a registry entry. */
 export function getProvider(nameCompany: string): CertProvider {
   return providers[nameCompany] ?? { label: nameCompany };
 }
