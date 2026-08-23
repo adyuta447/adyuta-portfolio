@@ -17,6 +17,7 @@ const skills: Skills = {
     "Tailwind CSS",
     "Node.js",
     "SASS",
+    "JavaScript",
     "TypeScript",
     "SQL",
     "Supabase",

@@ -4,11 +4,6 @@ interface TechMarkSpriteProps {
   marks: TechMark[];
 }
 
-/**
- * Defines every mark once so the strip can reference them with <use>. Inlining
- * the paths per copy instead would put the same few kilobytes of geometry into
- * the HTML a hundred times over.
- */
 export function TechMarkSprite({ marks }: TechMarkSpriteProps) {
   return (
     <svg

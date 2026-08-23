@@ -7,7 +7,6 @@ import Head from "../atoms/head";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-// Newest first, matching how the Experience section reads.
 const sortedEducation = [...EducationItem].sort(
   (a, b) => parseInt(b.startDate, 10) - parseInt(a.startDate, 10),
 );

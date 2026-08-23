@@ -777,6 +777,43 @@
   }
 }
 
+/* Keeps the halftone clear of the copy: a vertical fade for the section edges,
+   intersected with a horizontal one that thins the field behind the text column.
+   The top stop is in pixels, not a percentage, because it has to clear the fixed
+   navbar — which is a constant height while the hero's is not. The navbar can
+   then stay transparent until scroll without dots showing through its labels. */
+.hero-dither-mask {
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 110px, #000 210px, #000 84%, transparent),
+    linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
+  mask-image:
+    linear-gradient(to bottom, transparent 110px, #000 210px, #000 84%, transparent),
+    linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* One column on phones: the copy sits over the field rather than beside it, so
+   the horizontal fade protects nothing and only dims one edge. */
+@media (max-width: 640px) {
+  .hero-dither-mask {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 96px,
+      #000 180px,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 96px,
+      #000 180px,
+      #000 88%,
+      transparent
+    );
+  }
+}
+
 .grid-bg {
   background-image:
     linear-gradient(

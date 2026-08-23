@@ -10,6 +10,7 @@ import OrganizationalExperience from "@/components/organisms/organizational-expe
 import HonorsAwards from "@/components/organisms/honors-awards";
 import { Footer } from "@/components/organisms/footer";
 import { CursorGlow } from "@/components/animations/cursor-glow";
+import { WebglNotice } from "@/components/molecules/webgl-notice";
 import { getGitHubRepos } from "@/lib/github";
 
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adyuta447";
@@ -33,6 +34,7 @@ export default async function Home() {
           <ProjectsGrid projects={projects} showAll={false} limit={6} />
           <Footer />
         </div>
+        <WebglNotice />
       </main>
     </>
   );

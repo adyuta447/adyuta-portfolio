@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { X, Minus, Plus } from "lucide-react";
 import skills from "@/app/data/skills";
+import { DitherBackground } from "@/components/atoms/dither-background";
 
 const roles = [
   "Front-End Engineer",
@@ -44,17 +45,21 @@ export function HeroSection() {
 
   return (
     <section className="relative px-4 grid-bg sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24">
-      <div className="mx-auto max-w-7xl">
+      <div className="hero-dither-mask pointer-events-none absolute inset-0 z-0">
+        <DitherBackground />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid min-w-0 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center lg:min-h-[70vh]">
           <div className="min-w-0 space-y-8 sm:space-y-10">
             <div className="space-y-3 animate-fade-in-up">
-              <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
+              <p className="w-fit bg-background font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
                 Hi, my name is
               </p>
-              <h1 className="text-2xl font-bold tracking-tight bg-background sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
+              <h1 className="w-fit text-2xl font-bold tracking-tight bg-background sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
                 Jan Agra Adyuta Harnowo
               </h1>
-              <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
+              <h1 className="w-fit bg-background text-lg font-bold tracking-tight sm:text-2xl sm:whitespace-nowrap lg:text-3xl">
                 <span className="bg-gradient-to-l from-primary/50 to-accent text-transparent bg-clip-text typing-cursor">
                   {displayText}
                 </span>
@@ -69,7 +74,7 @@ export function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-3">
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-lg border border-primary bg-primary/10 px-7 py-4 sm:py-3.5 font-mono text-sm text-primary transition-all duration-500 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-lg border border-primary bg-background px-7 py-4 sm:py-3.5 font-mono text-sm text-primary transition-all duration-500 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
               >
                 <span className="relative z-10">explore artifacts</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
@@ -80,7 +85,7 @@ export function HeroSection() {
               </a>
               <Link
                 href="/introduction"
-                className="group inline-flex items-center justify-center gap-3 rounded-lg border border-border px-7 py-4 sm:py-3.5 font-mono text-sm text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground hover:bg-secondary/50 active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-3 rounded-lg border border-border bg-background px-7 py-4 sm:py-3.5 font-mono text-sm text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground hover:bg-secondary active:scale-[0.98]"
               >
                 <span>introduction</span>
               </Link>
@@ -126,14 +131,14 @@ App Technologies: [${skills.appTechnologies.join(", ")}]
               </pre>
             </div>
 
-            <div className="absolute -right-2 sm:-right-6 -top-2 sm:-top-6 rounded-lg border border-primary/40 bg-primary/15 glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-primary animate-float">
+            <div className="absolute -right-2 sm:-right-6 -top-2 sm:-top-6 rounded-lg border border-primary/40 bg-card px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-primary animate-float">
               <span className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
                 v0.1.0
               </span>
             </div>
             <div
-              className="absolute -bottom-3 sm:-bottom-6 -left-2 sm:-left-6 rounded-lg border border-border bg-card glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground animate-float"
+              className="absolute -bottom-3 sm:-bottom-6 -left-2 sm:-left-6 rounded-lg border border-border bg-card px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground animate-float"
               style={{ animationDelay: "1s" }}
             >
               Jan. 2026

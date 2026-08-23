@@ -17,11 +17,13 @@ export interface ResumeBlock {
 const MM_TO_PX = 96 / 25.4;
 const PAGE_HEIGHT_MM = 297;
 const PAGE_MARGIN_Y_MM = 12;
-const PAGE_CONTENT_HEIGHT_PX = (PAGE_HEIGHT_MM - PAGE_MARGIN_Y_MM * 2) * MM_TO_PX;
+const PAGE_CONTENT_HEIGHT_PX =
+  (PAGE_HEIGHT_MM - PAGE_MARGIN_Y_MM * 2) * MM_TO_PX;
 
 const PAGE_WIDTH_MM = 210;
 const PAGE_MARGIN_X_MM = 16;
-export const PAGE_CONTENT_WIDTH_PX = (PAGE_WIDTH_MM - PAGE_MARGIN_X_MM * 2) * MM_TO_PX;
+export const PAGE_CONTENT_WIDTH_PX =
+  (PAGE_WIDTH_MM - PAGE_MARGIN_X_MM * 2) * MM_TO_PX;
 
 const PAGE_WIDTH_PX = PAGE_WIDTH_MM * MM_TO_PX;
 const PAGE_HEIGHT_PX = PAGE_HEIGHT_MM * MM_TO_PX;
@@ -74,17 +76,11 @@ export function ResumeDocument({ blocks }: { blocks: ResumeBlock[] }) {
     } else {
       measure();
     }
-
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
-  // The sheet keeps its real A4 pixel size internally (that's what the
-  // pagination math above measures against) — on narrow screens it's
-  // shrunk visually with a CSS transform instead, which doesn't affect
-  // how the content inside wraps.
   useEffect(() => {
     const el = frameRef.current;
     if (!el) return;
@@ -103,12 +99,18 @@ export function ResumeDocument({ blocks }: { blocks: ResumeBlock[] }) {
   const displayPages = pages ?? [blocks];
   const pageCount = displayPages.length;
 
-  const scrollToIndex = useCallback((index: number) => {
-    const scroller = scrollerRef.current;
-    if (!scroller) return;
-    const clamped = Math.max(0, Math.min(index, pageCount - 1));
-    scroller.scrollTo({ left: clamped * scroller.clientWidth, behavior: "smooth" });
-  }, [pageCount]);
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const scroller = scrollerRef.current;
+      if (!scroller) return;
+      const clamped = Math.max(0, Math.min(index, pageCount - 1));
+      scroller.scrollTo({
+        left: clamped * scroller.clientWidth,
+        behavior: "smooth",
+      });
+    },
+    [pageCount],
+  );
 
   const handleScroll = useCallback(() => {
     const scroller = scrollerRef.current;

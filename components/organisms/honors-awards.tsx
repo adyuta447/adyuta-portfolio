@@ -7,13 +7,8 @@ import Head from "../atoms/head";
 
 type Tier = "winner" | "runnerUp" | "finalist" | "participant";
 
-// The placement is stated in the title, so it's the only place to read the
-// tier from. Falls back to "participant", which is the safe default: a new
-// entry still renders, just without podium emphasis.
 function tierOf(title: string): Tier {
   const t = title.toLowerCase();
-  // Runner-up is tested first: "2nd Place Winner of ..." contains a winning
-  // phrase too, and would otherwise be promoted to the top tier.
   if (/\b(2nd place|juara 2|runner[- ]up)\b/.test(t)) return "runnerUp";
   if (/\b(1st place|juara 1|grand prize)\b/.test(t)) return "winner";
   if (/(semifinalist|finalist|top \d)/.test(t)) return "finalist";

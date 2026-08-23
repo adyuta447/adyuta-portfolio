@@ -27,7 +27,10 @@ export function TechMarquee({ groups, className }: TechMarqueeProps) {
           items={marks.map((mark) => (
             <TechMarkIcon
               key={mark.id}
-              mark={mark}
+              id={mark.id}
+              label={mark.label}
+              hex={mark.hex}
+              darkHex={mark.darkHex}
               className="mr-12 sm:mr-20"
             />
           ))}
