@@ -780,14 +780,15 @@
 /* Keeps the halftone clear of the copy: a vertical fade for the section edges,
    intersected with a horizontal one that thins the field behind the text column.
    The top stop is in pixels, not a percentage, because it has to clear the fixed
-   navbar — which is a constant height while the hero's is not. The navbar can
-   then stay transparent until scroll without dots showing through its labels. */
+   navbar — a constant height, where the hero's is not. The field now starts
+   inside the navbar's lower band and feathers over 32px, so it reaches as high
+   as it can while the labels, which sit around 44px, stay clear of it. */
 .hero-dither-mask {
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent 110px, #000 210px, #000 84%, transparent),
+    linear-gradient(to bottom, transparent 60px, #000 92px, #000 84%, transparent),
     linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
   mask-image:
-    linear-gradient(to bottom, transparent 110px, #000 210px, #000 84%, transparent),
+    linear-gradient(to bottom, transparent 60px, #000 92px, #000 84%, transparent),
     linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
@@ -799,15 +800,15 @@
   .hero-dither-mask {
     -webkit-mask-image: linear-gradient(
       to bottom,
-      transparent 96px,
-      #000 180px,
+      transparent 56px,
+      #000 84px,
       #000 88%,
       transparent
     );
     mask-image: linear-gradient(
       to bottom,
-      transparent 96px,
-      #000 180px,
+      transparent 56px,
+      #000 84px,
       #000 88%,
       transparent
     );
