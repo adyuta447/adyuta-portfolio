@@ -6,9 +6,6 @@ export interface Skills {
   coreCompetencies: string[];
 }
 
-// Single source of truth for the tech stack — also drives the "system_info"
-// terminal block on the homepage hero (components/organisms/hero-section.tsx)
-// so the two never drift apart.
 const skills: Skills = {
   operatingSystems: ["MacOS Tahoe", "Endavour OS", "Windows 11"],
   webTechnologies: [

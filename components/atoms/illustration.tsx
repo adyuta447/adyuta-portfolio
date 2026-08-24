@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface IllustrationProps {
   src: string;
@@ -7,7 +8,7 @@ interface IllustrationProps {
 
 export function Illustration({ src, className }: IllustrationProps) {
   return (
-    <img
+    <Image
       src={src}
       alt=""
       aria-hidden="true"

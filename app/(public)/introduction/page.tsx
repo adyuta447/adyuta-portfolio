@@ -18,10 +18,10 @@ export default function IntroductionPage() {
 
             <p className="text-base sm:text-lg leading-relaxed text-muted-foreground max-w-3xl">
               Front-end engineer with six years building web products, now
-              pushing into machine learning and MLOps. I co-founded CV.
-              Digital Awan Nusantara, where I split my time between shipping
-              React and Next.js interfaces and getting ML models out of
-              notebooks and into production.
+              pushing into machine learning and MLOps. I co-founded CV. Digital
+              Awan Nusantara, where I split my time between shipping React and
+              Next.js interfaces and getting ML models out of notebooks and into
+              production.
             </p>
           </div>
         </div>
@@ -44,24 +44,24 @@ export default function IntroductionPage() {
               <p>
                 My day-to-day work is mostly front-end: React, Next.js, PWAs,
                 Tailwind, and Shadcn UI, built on Turbopack. I care about
-                performance and architecture as much as how something looks,
-                and a background in cybersecurity means I think about data
-                handling and attack surface before I ship, not after.
+                performance and architecture as much as how something looks, and
+                a background in cybersecurity means I think about data handling
+                and attack surface before I ship, not after.
               </p>
 
               <p>
                 Over the past while I&apos;ve been teaching myself the machine
                 learning side properly: preprocessing, feature engineering,
-                training and evaluating models, then the less glamorous part
-                of actually running them, serving through FastAPI or Flask,
+                training and evaluating models, then the less glamorous part of
+                actually running them, serving through FastAPI or Flask,
                 packaging with Docker, tracking experiments in MLflow, and
                 keeping an eye on things in production with Prometheus and
                 Grafana.
               </p>
 
               <p>
-                At CV. Digital Awan Nusantara I&apos;m not just writing code.
-                I handle the financial side, client relationships, and product
+                At CV. Digital Awan Nusantara I&apos;m not just writing code. I
+                handle the financial side, client relationships, and product
                 decisions too, which forces me to weigh engineering choices
                 against what the business can actually sustain. The direction
                 I&apos;m working toward is systems where the ML isn&apos;t a
