@@ -32,7 +32,6 @@ const recentAchievements = [...certifications]
   )
   .slice(0, 4);
 
-/** Providers present in the data, busiest first. */
 const providerCounts = Object.entries(
   certifications.reduce<Record<string, number>>((counts, cert) => {
     counts[cert.nameCompany] = (counts[cert.nameCompany] ?? 0) + 1;

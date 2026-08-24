@@ -14,6 +14,8 @@ export function Illustration({ src, className }: IllustrationProps) {
       aria-hidden="true"
       loading="lazy"
       decoding="async"
+      width={400}
+      height={400}
       className={cn("block h-auto w-full", className)}
     />
   );
