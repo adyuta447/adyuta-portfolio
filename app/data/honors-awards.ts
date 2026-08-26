@@ -22,6 +22,12 @@ const HonorsAwardsItem: HonorAward[] = [
     date: "Nov 2025",
   },
   {
+    id: 11,
+    title: "Semifinalist in Hackathon x Digdaya Bank Indonesia 2026",
+    issuer: "Bank Indonesia",
+    date: "2026",
+  },
+  {
     id: 3,
     title:
       "Semifinalist in International Business Case Competition Ganesha Festival 2026",
