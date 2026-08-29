@@ -69,7 +69,9 @@ export default function OrganizationalExperience() {
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
                       <span className="inline-flex items-center gap-1.5">
                         <Calendar className="h-3 w-3" />
-                        {item.startDate} — {item.endDate}
+                        {item.startDate === item.endDate
+                          ? item.startDate
+                          : `${item.startDate} — ${item.endDate}`}
                       </span>
                     </div>
 
