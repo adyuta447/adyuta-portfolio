@@ -11,11 +11,9 @@ const OrganizationsItem: OrganizationExperience[] = [
   {
     id: 21,
     organization: "INNOVARE Universitas Indonesia",
-    role: "Guest Speaker, INNOClub 2026 Grand Launching",
+    role: "Invited Guest Speaker, INNOClub 2026 Grand Launching",
     startDate: "Aug 2026",
     endDate: "Aug 2026",
-    description:
-      "Invited by INNOVARE Universitas Indonesia to speak at the INNOClub 2026 Grand Launching.",
   },
   {
     id: 1,
