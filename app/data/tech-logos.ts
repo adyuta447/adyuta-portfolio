@@ -1,19 +1,6 @@
-/**
- * Brand marks for the tech stack strip, keyed by the exact label used in
- * app/data/skills.ts. Paths are 24x24 single-path glyphs and hex values are the
- * official brand colors, both lifted from simple-icons (CC0-1.0) and inlined so
- * the strip needs no runtime dependency.
- *
- * Entries share an `id` when they share a mark (React Native ships the React
- * atom), which lets callers drop duplicates from a logo-only strip. Labels with
- * no accurate mark available — SQL is not a brand, Matplotlib is missing from
- * simple-icons — are absent on purpose and are skipped by the strip.
- */
 export interface TechLogo {
   id: string;
-  /** Official brand color, shown on hover. */
   hex: string;
-  /** Set only where `hex` disappears against a dark surface (Next.js is pure black). */
   darkHex?: string;
   path: string;
 }

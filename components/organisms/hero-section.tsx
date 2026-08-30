@@ -65,11 +65,7 @@ export function HeroSection() {
                 </span>
               </h1>
             </div>
-            <p className="max-w-lg text-base sm:text-lg dark:text-white leading-relaxed text-muted-foreground animate-fade-in-up stagger-2 z-10">
-              With over 5 years of experience in Front-End Development and Cyber
-              Security, I specialize in building modern, secure, and
-              high-performing web applications.
-            </p>
+
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-3">
               <a
