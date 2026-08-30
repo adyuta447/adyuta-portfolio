@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { supportsWebGL2 } from "@/lib/webgl-support";
+import { subscribeScrollActivity } from "@/lib/scroll-activity";
 import {
   createDitherRenderer,
   type DitherOptions,
@@ -178,6 +179,7 @@ export function DitherBackground({
     let lastFrameTime = 0;
     let running = false;
     let onScreen = false;
+    let scrolling = false;
 
     const draw = (now: number) => {
       frame = requestAnimationFrame(draw);
@@ -190,10 +192,19 @@ export function DitherBackground({
       renderer?.render(elapsed);
     };
 
-    // Off-screen or backgrounded tabs cost nothing: the loop is stopped, not
-    // throttled, and picks up where it left off so the wave never jumps.
+    // Off-screen, backgrounded, or mid-scroll all cost nothing: the loop is
+    // stopped, not throttled, and picks up where it left off so the wave never
+    // jumps.
+    //
+    // Scrolling matters most. Once the hero is pinned it stays on screen for the
+    // whole overlap, and every glass card riding over it has to re-blur its
+    // backdrop each time this canvas repaints. Holding the last frame for the
+    // duration of a scroll removes that work entirely, and nobody looks at a
+    // slow background while the page is moving.
     const resume = () => {
-      if (running || isStatic || !onScreen || document.hidden) return;
+      if (running || isStatic || !onScreen || scrolling || document.hidden) {
+        return;
+      }
       running = true;
       lastFrameTime = performance.now();
       frame = requestAnimationFrame(draw);
@@ -260,6 +271,12 @@ export function DitherBackground({
       else resume();
     };
 
+    const unsubscribeScroll = subscribeScrollActivity((isScrolling) => {
+      scrolling = isScrolling;
+      if (isScrolling) pause();
+      else resume();
+    });
+
     document.addEventListener("visibilitychange", handleVisibilityChange);
     canvas.addEventListener("webglcontextlost", handleContextLost);
     canvas.addEventListener("webglcontextrestored", handleContextRestored);
@@ -281,6 +298,7 @@ export function DitherBackground({
       canvas.removeEventListener("webglcontextlost", handleContextLost);
       canvas.removeEventListener("webglcontextrestored", handleContextRestored);
       window.removeEventListener("pointermove", handlePointerMove);
+      unsubscribeScroll();
       renderer?.dispose();
       rendererRef.current = null;
     };

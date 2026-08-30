@@ -3,7 +3,6 @@ import { Code2, Layers, FileText, Zap, Bot, Globe } from "lucide-react";
 export default function IntroductionPage() {
   return (
     <div>
-      {/* Hero Section */}
       <section className="relative min-h-[60vh] px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20">
         <div className="mx-auto max-w-4xl">
           <div className="space-y-6 sm:space-y-8">

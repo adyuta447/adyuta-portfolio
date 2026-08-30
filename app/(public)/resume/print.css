@@ -19,17 +19,12 @@
     background: #ffffff !important;
   }
 
-  /* The screen layout pads the top for the fixed navbar and centers a
-     max-width column; none of that should survive into the printed page. */
   .resume-shell {
     padding: 0 !important;
     max-width: none !important;
     margin: 0 !important;
   }
 
-  /* On screen the pages sit in a horizontal swipeable strip, one visible
-     at a time; print needs every page stacked in normal document flow
-     instead, since a print job doesn't have a "current scroll position". */
   .resume-stack {
     display: block !important;
     overflow: visible !important;
@@ -42,18 +37,11 @@
     scroll-snap-align: none !important;
   }
 
-  /* The on-screen frame only exists to reserve space for the scaled-down
-     sheet on narrow viewports; print always renders at full, unscaled
-     size, so the frame's fixed pixel box must not constrain anything. */
   .a4-sheet-frame {
     width: 100% !important;
     height: auto !important;
   }
 
-  /* Each sheet was already sized/measured on screen to hold exactly one
-     page's worth of content — printing forces a real page break at the
-     same boundary instead of letting the browser re-flow independently,
-     so the PDF matches the on-screen preview exactly. */
   .a4-sheet {
     transform: none !important;
     width: 100% !important;
