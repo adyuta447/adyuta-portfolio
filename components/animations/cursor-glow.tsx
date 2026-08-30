@@ -1,66 +1,101 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useRef } from "react";
 
+/**
+ * A pointer-following glow. Written against refs, not state: the cursor moves
+ * every frame and a `setState` there re-runs React on each one. Here the two
+ * layers are positioned with a direct `transform` write inside a single rAF,
+ * and nothing mounts at all off the desktop.
+ */
 export function CursorGlow() {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState(false)
-  const [isHovering, setIsHovering] = useState(false)
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    requestAnimationFrame(() => {
-      setPosition({ x: e.clientX, y: e.clientY })
-    })
-    setIsVisible(true)
-  }, [])
+  const glowRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseLeave = () => {
-      setIsVisible(false)
-    }
+    const fine = window.matchMedia("(min-width: 1024px) and (pointer: fine)");
+    if (!fine.matches) return;
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const isInteractive = target.closest('a, button, [role="button"], input, textarea, select')
-      setIsHovering(!!isInteractive)
-    }
+    const glow = glowRef.current;
+    const dot = dotRef.current;
+    if (!glow || !dot) return;
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true })
-    document.body.addEventListener("mouseleave", handleMouseLeave)
-    document.addEventListener("mouseover", handleMouseOver, { passive: true })
+    let raf = 0;
+    let x = 0;
+    let y = 0;
+    let shown = false;
+
+    const paint = () => {
+      raf = 0;
+      const t = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      glow.style.transform = t;
+      dot.style.transform = t;
+      if (!shown) {
+        shown = true;
+        glow.style.opacity = "1";
+        dot.style.opacity = "0.15";
+      }
+    };
+
+    const onMove = (event: MouseEvent) => {
+      x = event.clientX;
+      y = event.clientY;
+      if (!raf) raf = requestAnimationFrame(paint);
+    };
+
+    const onLeave = () => {
+      shown = false;
+      glow.style.opacity = "0";
+      dot.style.opacity = "0";
+    };
+
+    const onOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const interactive = target.closest(
+        'a, button, [role="button"], input, textarea, select',
+      );
+      const size = interactive ? "500px" : "400px";
+      glow.style.width = size;
+      glow.style.height = size;
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.body.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseover", onOver, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      document.body.removeEventListener("mouseleave", handleMouseLeave)
-      document.removeEventListener("mouseover", handleMouseOver)
-    }
-  }, [handleMouseMove])
+      window.removeEventListener("mousemove", onMove);
+      document.body.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseover", onOver);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <>
       <div
+        ref={glowRef}
         className="cursor-glow hidden lg:block pointer-events-none"
         style={{
-          left: position.x,
-          top: position.y,
-          opacity: isVisible ? 1 : 0,
-          width: isHovering ? "500px" : "400px",
-          height: isHovering ? "500px" : "400px",
+          left: 0,
+          top: 0,
+          opacity: 0,
+          width: "400px",
+          height: "400px",
           transition: "opacity 0.4s ease, width 0.3s ease, height 0.3s ease",
         }}
       />
       <div
-        className="hidden lg:block pointer-events-none fixed w-8 h-8 rounded-full mix-blend-screen"
+        ref={dotRef}
+        className="hidden lg:block pointer-events-none fixed left-0 top-0 w-8 h-8 rounded-full mix-blend-screen"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)",
-          opacity: isVisible ? 0.15 : 0,
+          opacity: 0,
+          background:
+            "radial-gradient(circle, var(--primary) 0%, transparent 70%)",
           transition: "opacity 0.2s ease",
           filter: "blur(4px)",
         }}
       />
     </>
-  )
+  );
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import { cn, toBullets } from "@/lib/utils";
 import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import ExperiencesItem, { Experience } from "@/app/data/experiences";
@@ -39,7 +37,7 @@ export default function Experiences() {
               <div
                 key={item.id}
                 className={cn(
-                  "group relative p-5 sm:p-6 transition-all duration-300 hover:bg-secondary/30 animate-fade-in",
+                  "group relative p-5 sm:p-6 transition-colors duration-300 hover:bg-secondary/30 animate-fade-in",
                   item.endDate === "Present" && "bg-primary/5",
                 )}
                 style={{ animationDelay: `${index * 100 + 400}ms` }}

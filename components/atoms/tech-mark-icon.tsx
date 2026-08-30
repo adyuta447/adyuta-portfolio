@@ -1,17 +1,18 @@
-"use client";
-
-import { useState } from "react";
-import { useTheme } from "next-themes";
+import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 import { techMarkId, type TechMark } from "@/lib/tech-stack";
 
-interface TechMarkIconProps extends Pick<
-  TechMark,
-  "id" | "label" | "hex" | "darkHex"
-> {
+interface TechMarkIconProps
+  extends Pick<TechMark, "id" | "label" | "hex" | "darkHex"> {
   className?: string;
 }
 
+/**
+ * Server component. The hover-to-brand-colour used to need `useState` +
+ * `useTheme` per icon — ~100 hydrating components for one marquee. The brand
+ * colours are handed to CSS as custom properties instead and `.tech-mark`
+ * rules in globals.css do the theme-aware swap on `:hover`, so this ships no JS.
+ */
 export function TechMarkIcon({
   id,
   label,
@@ -19,25 +20,20 @@ export function TechMarkIcon({
   darkHex,
   className,
 }: TechMarkIconProps) {
-  const [isActive, setIsActive] = useState(false);
-  const { resolvedTheme } = useTheme();
-
-  const brandColor = resolvedTheme === "dark" ? (darkHex ?? hex) : hex;
-
   return (
     <span
       title={label}
-      className={cn("shrink-0", className)}
-      onPointerEnter={() => setIsActive(true)}
-      onPointerLeave={() => setIsActive(false)}
+      className={cn("tech-mark shrink-0", className)}
+      style={
+        {
+          "--tm-brand": hex,
+          "--tm-brand-dark": darkHex ?? hex,
+        } as CSSProperties
+      }
     >
       <svg
         viewBox="0 0 24 24"
-        style={isActive ? { color: brandColor } : undefined}
-        className={cn(
-          "h-10 w-10 fill-current transition-colors duration-200 sm:h-14 sm:w-14",
-          !isActive && "text-muted-foreground",
-        )}
+        className="h-10 w-10 fill-current transition-colors duration-200 sm:h-14 sm:w-14"
       >
         <use href={`#${techMarkId(id)}`} />
       </svg>

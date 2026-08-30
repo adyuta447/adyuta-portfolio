@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 import EducationItem from "@/app/data/education";

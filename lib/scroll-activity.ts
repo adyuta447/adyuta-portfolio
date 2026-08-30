@@ -21,13 +21,6 @@ function handleScroll() {
   idleTimer = window.setTimeout(() => notify(false), IDLE_DELAY_MS);
 }
 
-/**
- * A single shared answer to "is the page moving right now".
- *
- * Everything that wants to back off during a scroll subscribes here rather than
- * adding its own listener, so the scroll handler stays one passive callback no
- * matter how many features care.
- */
 export function subscribeScrollActivity(listener: ScrollListener): () => void {
   listeners.add(listener);
 

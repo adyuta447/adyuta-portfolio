@@ -829,3 +829,20 @@
     );
   background-size: 40px 40px;
 }
+
+/* Tech marquee icons. Base is muted; hover reveals the brand colour, which each
+   icon passes in as --tm-brand / --tm-brand-dark. Pure CSS so the icons stay
+   server-rendered instead of hydrating one component per logo. */
+.tech-mark svg {
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) {
+  .tech-mark:hover svg {
+    color: var(--tm-brand);
+  }
+
+  .dark .tech-mark:hover svg {
+    color: var(--tm-brand-dark, var(--tm-brand));
+  }
+}

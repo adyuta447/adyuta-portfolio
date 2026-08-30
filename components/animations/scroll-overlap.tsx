@@ -4,16 +4,10 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { createPinOverlap } from "@/lib/scroll-pin";
 
 interface ScrollOverlapProps {
-  /** Held in place while the page scrolls past it. */
   hero: ReactNode;
-  /** Everything after the hero; slides up and covers it. */
   children: ReactNode;
 }
 
-/**
- * Markup and lifecycle only — the scroll behaviour itself lives in
- * lib/scroll-pin, which touches nothing but the two elements handed to it.
- */
 export function ScrollOverlap({ hero, children }: ScrollOverlapProps) {
   const pinRef = useRef<HTMLDivElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);

@@ -1,10 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { X, Minus, Plus } from "lucide-react";
 import skills from "@/app/data/skills";
-import { DitherBackground } from "@/components/atoms/dither-background";
+import { DitherBackground } from "@/components/atoms/dither-background-lazy";
+import { RoleTyper } from "./role-typer";
 
 const roles = [
   "Front-End Engineer",
@@ -15,34 +13,6 @@ const roles = [
 ];
 
 export function HeroSection() {
-  const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const targetText = roles[currentRole];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (displayText.length < targetText.length) {
-            setDisplayText(targetText.slice(0, displayText.length + 1));
-          } else {
-            setTimeout(() => setIsDeleting(true), 2000);
-          }
-        } else {
-          if (displayText.length > 0) {
-            setDisplayText(displayText.slice(0, -1));
-          } else {
-            setIsDeleting(false);
-            setCurrentRole((prev) => (prev + 1) % roles.length);
-          }
-        }
-      },
-      isDeleting ? 50 : 100,
-    );
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole]);
-
   return (
     <section className="relative px-4 grid-bg sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24">
       <div className="hero-dither-mask pointer-events-none absolute inset-0 z-0">
@@ -59,10 +29,8 @@ export function HeroSection() {
               <h1 className="w-fit text-2xl font-bold tracking-tight bg-background sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
                 Jan Agra Adyuta Harnowo
               </h1>
-              <h1 className="w-fit bg-background text-lg font-bold tracking-tight sm:text-2xl sm:whitespace-nowrap lg:text-3xl">
-                <span className="bg-gradient-to-l from-primary/50 to-accent text-transparent bg-clip-text typing-cursor">
-                  {displayText}
-                </span>
+              <h1 className="w-fit min-h-[1.2em] bg-background text-lg font-bold tracking-tight sm:text-2xl sm:whitespace-nowrap lg:text-3xl">
+                <RoleTyper roles={roles} />
               </h1>
             </div>
 

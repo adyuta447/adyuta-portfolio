@@ -1,5 +1,3 @@
-"use client";
-
 import type { LucideIcon } from "lucide-react";
 import { Trophy, Medal, Award, Flag } from "lucide-react";
 import HonorsAwardsItem, { type HonorAward } from "@/app/data/honors-awards";

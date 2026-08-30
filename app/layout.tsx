@@ -1,9 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/animations/theme-provider";
 import "./globals.css";
+
+const GA_ID = "G-T1KGX2WR7J";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -22,6 +25,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.adyuta.tech"),
   title: {
     default: "Adyuta — Personal Portfolio",
     template: "%s — Adyuta",
@@ -104,23 +108,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geist.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
     >
-      <head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-T1KGX2WR7J"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-T1KGX2WR7J');
-            `,
-          }}
-        />
-      </head>
       <body className="font-sans antialiased">
         <ThemeProvider
           attribute="class"
@@ -131,6 +118,16 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Analytics />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="lazyOnload"
+        />
+        <Script id="gtag-init" strategy="lazyOnload">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+        </Script>
       </body>
     </html>
   );
