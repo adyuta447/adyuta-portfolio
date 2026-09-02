@@ -51,6 +51,12 @@ const providers: Record<string, CertProvider> = {
     label: "Cisco",
     logo: "/cert-logos/cisco.png",
   },
+  "Central Bank of Indonesia": {
+    label: "Bank Indonesia",
+  },
+  "INNOVARE UI": {
+    label: "INNOVARE",
+  },
 };
 
 export function getProvider(nameCompany: string): CertProvider {

@@ -447,6 +447,35 @@ const CertificationsItem: Certification[] = [
     credentialId: "98XW86970PM3",
     url: "https://www.dicoding.com/certificates/98XW86970PM3",
   },
+  {
+    id: 57,
+    name: "DIGDAYA Essential Phase",
+    nameCompany: "Central Bank of Indonesia",
+    dateRelease: "Aug 2026",
+    credentialId: "1c04121d-ee2f-4c62-8598-9e86f62349e0",
+  },
+  {
+    id: 58,
+    name: "DIGDAYA Practitioner Phase",
+    nameCompany: "Central Bank of Indonesia",
+    dateRelease: "Aug 2026",
+    credentialId: "dc4c591b-59b6-4bbc-8852-e09328c6c50b",
+  },
+  {
+    id: 59,
+    name: "Guest Speaker at INNOClub 2026 Grand Launching",
+    nameCompany: "INNOVARE UI",
+    dateRelease: "Aug 2026",
+    credentialId: "XXX/CERT/GL-INNOCLUB/BEMUI/2026",
+  },
+  {
+    id: 60,
+    name: "Machine Learning Operations (MLOps)",
+    nameCompany: "Dicoding Indonesia",
+    dateRelease: "Sep 2026",
+    credentialId: "JLX1KG5R2P72",
+    url: "https://www.dicoding.com/certificates/JLX1KG5R2P72",
+  },
 ];
 
 export default CertificationsItem;
