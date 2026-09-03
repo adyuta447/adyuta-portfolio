@@ -467,6 +467,7 @@ const CertificationsItem: Certification[] = [
     nameCompany: "INNOVARE UI",
     dateRelease: "Aug 2026",
     credentialId: "XXX/CERT/GL-INNOCLUB/BEMUI/2026",
+    url: "https://drive.google.com/file/d/1f5lHlSKMIXFifTuSUu2_BTYlMUSjEv-t/view",
   },
   {
     id: 60,
