@@ -453,6 +453,7 @@ const CertificationsItem: Certification[] = [
     nameCompany: "Central Bank of Indonesia",
     dateRelease: "Aug 2026",
     credentialId: "1c04121d-ee2f-4c62-8598-9e86f62349e0",
+    url: "https://credsverse.com/credentials/1c04121d-ee2f-4c62-8598-9e86f62349e0?preview=1",
   },
   {
     id: 58,
@@ -460,6 +461,7 @@ const CertificationsItem: Certification[] = [
     nameCompany: "Central Bank of Indonesia",
     dateRelease: "Aug 2026",
     credentialId: "dc4c591b-59b6-4bbc-8852-e09328c6c50b",
+    url: "https://credsverse.com/credentials/dc4c591b-59b6-4bbc-8852-e09328c6c50b?preview=1",
   },
   {
     id: 59,
