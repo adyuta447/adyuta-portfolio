@@ -56,6 +56,7 @@ const providers: Record<string, CertProvider> = {
   },
   "INNOVARE UI": {
     label: "INNOVARE",
+    logo: "/cert-logos/innovareui.jpeg",
   },
 };
 
