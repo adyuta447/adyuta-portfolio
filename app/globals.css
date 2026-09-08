@@ -44,38 +44,41 @@
   --glow-color-strong: oklch(0.5 0.22 170 / 0.25);
 }
 
+/* Dark surfaces are anchored on #222831 = oklch(0.275 0.019 258), with each
+   layer stepped up in lightness from there so cards and borders still read as
+   raised against the background instead of sinking into it. */
 .dark {
-  --background: oklch(0.06 0.015 260);
+  --background: oklch(0.275 0.019 258);
   --foreground: oklch(0.96 0 0);
-  --card: oklch(0.1 0.015 260);
+  --card: oklch(0.325 0.018 258);
   --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.1 0.015 260);
+  --popover: oklch(0.325 0.018 258);
   --popover-foreground: oklch(0.96 0 0);
   --primary: oklch(0.72 0.2 170);
-  --primary-foreground: oklch(0.06 0.015 260);
-  --secondary: oklch(0.16 0.015 260);
+  --primary-foreground: oklch(0.275 0.019 258);
+  --secondary: oklch(0.365 0.018 258);
   --secondary-foreground: oklch(0.88 0 0);
-  --muted: oklch(0.16 0.015 260);
-  --muted-foreground: oklch(0.58 0 0);
+  --muted: oklch(0.365 0.018 258);
+  --muted-foreground: oklch(0.72 0.012 258);
   --accent: oklch(0.72 0.2 170);
-  --accent-foreground: oklch(0.06 0.015 260);
+  --accent-foreground: oklch(0.275 0.019 258);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.2 0.015 260);
-  --input: oklch(0.2 0.015 260);
+  --border: oklch(0.425 0.018 258);
+  --input: oklch(0.425 0.018 258);
   --ring: oklch(0.72 0.2 170);
   --chart-1: oklch(0.72 0.2 170);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.08 0.015 260);
+  --sidebar: oklch(0.3 0.018 258);
   --sidebar-foreground: oklch(0.96 0 0);
   --sidebar-primary: oklch(0.72 0.2 170);
-  --sidebar-primary-foreground: oklch(0.06 0.015 260);
-  --sidebar-accent: oklch(0.16 0.015 260);
+  --sidebar-primary-foreground: oklch(0.275 0.019 258);
+  --sidebar-accent: oklch(0.365 0.018 258);
   --sidebar-accent-foreground: oklch(0.96 0 0);
-  --sidebar-border: oklch(0.2 0.015 260);
+  --sidebar-border: oklch(0.425 0.018 258);
   --sidebar-ring: oklch(0.72 0.2 170);
 
   --glow-color: oklch(0.72 0.2 170 / 0.12);
@@ -373,6 +376,33 @@
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient-shift 4s ease infinite;
+}
+
+/* Auto-scrolling logo strip. The track holds two identical halves and every
+   item carries its own right margin, so a -50% shift lands exactly on the
+   starting frame and the loop reads as continuous. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee var(--marquee-duration, 30s) linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
 }
 
 /* Stagger animation delays */
@@ -747,6 +777,44 @@
   }
 }
 
+/* Keeps the halftone clear of the copy: a vertical fade for the section edges,
+   intersected with a horizontal one that thins the field behind the text column.
+   The top stop is in pixels, not a percentage, because it has to clear the fixed
+   navbar — a constant height, where the hero's is not. The field now starts
+   inside the navbar's lower band and feathers over 32px, so it reaches as high
+   as it can while the labels, which sit around 44px, stay clear of it. */
+.hero-dither-mask {
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 60px, #000 92px, #000 84%, transparent),
+    linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
+  mask-image:
+    linear-gradient(to bottom, transparent 60px, #000 92px, #000 84%, transparent),
+    linear-gradient(to right, rgba(0, 0, 0, 0.5), #000 45%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* One column on phones: the copy sits over the field rather than beside it, so
+   the horizontal fade protects nothing and only dims one edge. */
+@media (max-width: 640px) {
+  .hero-dither-mask {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 56px,
+      #000 84px,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 56px,
+      #000 84px,
+      #000 88%,
+      transparent
+    );
+  }
+}
+
 .grid-bg {
   background-image:
     linear-gradient(
@@ -760,4 +828,21 @@
       transparent 1px
     );
   background-size: 40px 40px;
+}
+
+/* Tech marquee icons. Base is muted; hover reveals the brand colour, which each
+   icon passes in as --tm-brand / --tm-brand-dark. Pure CSS so the icons stay
+   server-rendered instead of hydrating one component per logo. */
+.tech-mark svg {
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) {
+  .tech-mark:hover svg {
+    color: var(--tm-brand);
+  }
+
+  .dark .tech-mark:hover svg {
+    color: var(--tm-brand-dark, var(--tm-brand));
+  }
 }

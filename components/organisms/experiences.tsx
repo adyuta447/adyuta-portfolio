@@ -1,6 +1,4 @@
-"use client";
-
-import { cn } from "@/lib/utils";
+import { cn, toBullets } from "@/lib/utils";
 import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import ExperiencesItem, { Experience } from "@/app/data/experiences";
 import Head from "../atoms/head";
@@ -39,19 +37,20 @@ export default function Experiences() {
               <div
                 key={item.id}
                 className={cn(
-                  "group relative p-5 sm:p-6 transition-all duration-300 hover:bg-secondary/30 animate-fade-in",
+                  "group relative p-5 sm:p-6 transition-colors duration-300 hover:bg-secondary/30 animate-fade-in",
                   item.endDate === "Present" && "bg-primary/5",
                 )}
                 style={{ animationDelay: `${index * 100 + 400}ms` }}
               >
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/50 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex-1 space-y-3 min-w-0">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <span className="text-primary font-mono text-sm sm:text-base shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                    $
+                  </span>
+
+                  <div className="min-w-0 flex-1 space-y-3">
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                      <span className="text-primary font-mono text-sm shrink-0 transition-transform duration-300 group-hover:translate-x-1">
-                        $
-                      </span>
                       <h4 className="font-mono text-sm sm:text-base font-medium tracking-tight transition-colors group-hover:text-primary">
                         {item.role}
                       </h4>
@@ -64,7 +63,7 @@ export default function Experiences() {
                         </span>
                       )}
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 pl-5 sm:pl-6">
+                    <div className="flex flex-wrap items-center gap-2">
                       {item.url ? (
                         <a
                           href={item.url}
@@ -91,7 +90,7 @@ export default function Experiences() {
                     </div>
 
                     {/* Location & Date */}
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 pl-5 sm:pl-6 text-xs text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
                       <span className="inline-flex items-center gap-1.5">
                         <MapPin className="h-3 w-3" />
                         {item.location}
@@ -101,10 +100,12 @@ export default function Experiences() {
                         {item.startDate} — {item.endDate}
                       </span>
                     </div>
-                    <p className="pl-5 sm:pl-6 text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 pl-5 sm:pl-6 pt-1">
+                    <ul className="ml-4 list-disc space-y-1.5 text-sm text-muted-foreground leading-relaxed marker:text-primary/50">
+                      {toBullets(item.description).map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                    <div className="flex flex-wrap gap-2 pt-1">
                       {item.technologies.map((tech) => (
                         <span
                           key={tech}

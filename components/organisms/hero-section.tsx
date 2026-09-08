@@ -1,8 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { X, Minus, Plus } from "lucide-react";
+import skills from "@/app/data/skills";
+import { DitherBackground } from "@/components/atoms/dither-background-lazy";
+import { RoleTyper } from "./role-typer";
 
 const roles = [
   "Front-End Engineer",
@@ -13,62 +13,32 @@ const roles = [
 ];
 
 export function HeroSection() {
-  const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const targetText = roles[currentRole];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (displayText.length < targetText.length) {
-            setDisplayText(targetText.slice(0, displayText.length + 1));
-          } else {
-            setTimeout(() => setIsDeleting(true), 2000);
-          }
-        } else {
-          if (displayText.length > 0) {
-            setDisplayText(displayText.slice(0, -1));
-          } else {
-            setIsDeleting(false);
-            setCurrentRole((prev) => (prev + 1) % roles.length);
-          }
-        }
-      },
-      isDeleting ? 50 : 100,
-    );
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole]);
-
   return (
     <section className="relative px-4 grid-bg sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center lg:min-h-[70vh]">
-          <div className="space-y-8 sm:space-y-10">
+      <div className="hero-dither-mask pointer-events-none absolute inset-0 z-0">
+        <DitherBackground />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="grid min-w-0 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center lg:min-h-[70vh]">
+          <div className="min-w-0 space-y-8 sm:space-y-10">
             <div className="space-y-3 animate-fade-in-up">
-              <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
+              <p className="w-fit bg-background font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
                 Hi, my name is
               </p>
-              <h1 className="text-2xl font-bold tracking-tight bg-white dark:bg-black sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
+              <h1 className="w-fit text-2xl font-bold tracking-tight bg-background sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
                 Jan Agra Adyuta Harnowo
               </h1>
-              <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-5xl text-balance">
-                <span className="bg-gradient-to-l from-primary/50 to-accent text-transparent bg-clip-text typing-cursor">
-                  {displayText}
-                </span>
+              <h1 className="w-fit min-h-[1.2em] bg-background text-lg font-bold tracking-tight sm:text-2xl sm:whitespace-nowrap lg:text-3xl">
+                <RoleTyper roles={roles} />
               </h1>
             </div>
-            <p className="max-w-lg text-base sm:text-lg dark:text-white leading-relaxed text-muted-foreground animate-fade-in-up stagger-2 z-10">
-              With over 5 years of experience in Front-End Development and Cyber
-              Security, I specialize in building modern, secure, and
-              high-performing web applications.
-            </p>
+
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-3">
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-lg border border-primary bg-primary/10 px-7 py-4 sm:py-3.5 font-mono text-sm text-primary transition-all duration-500 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-lg border border-primary bg-background px-7 py-4 sm:py-3.5 font-mono text-sm text-primary transition-all duration-500 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
               >
                 <span className="relative z-10">explore artifacts</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
@@ -79,7 +49,7 @@ export function HeroSection() {
               </a>
               <Link
                 href="/introduction"
-                className="group inline-flex items-center justify-center gap-3 rounded-lg border border-border px-7 py-4 sm:py-3.5 font-mono text-sm text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground hover:bg-secondary/50 active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-3 rounded-lg border border-border bg-background px-7 py-4 sm:py-3.5 font-mono text-sm text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground hover:bg-secondary active:scale-[0.98]"
               >
                 <span>introduction</span>
               </Link>
@@ -87,8 +57,8 @@ export function HeroSection() {
           </div>
 
           {/* Right column - ASCII Art / Visual */}
-          <div className="relative animate-scale-in stagger-4">
-            <div className="relative rounded-xl border border-border bg-black p-5 sm:p-8 hover-lift">
+          <div className="relative min-w-0 animate-scale-in stagger-4">
+            <div className="relative rounded-xl border border-border bg-[#141a22] p-5 sm:p-8 hover-lift">
               {/* Terminal header dots */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive flex items-center justify-center">
@@ -105,57 +75,34 @@ export function HeroSection() {
                 terminal://adyuta
               </div>
 
-              <pre className="mt-6 overflow-hidden font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
-                <span className="sm:hidden">
-                  {`
+              <pre className="mt-6 overflow-hidden whitespace-pre-wrap wrap-break-word font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
+                {`
 Neon Terminal - version 1.0.0
 ===========================
 User: adyuta
 Location: /home/adyuta/
 
 > system_info
-Operating System: [MacOS Tahoe, 
-Endavour OS, Windows 11]
+Operating System: [${skills.operatingSystems.join(", ")}]
 Web Technologies: [
-React, Next.js, Tailwind CSS, Node.js, SASS,
-TypeScript, SQL, Supabase, Laravel, Webpack
+${skills.webTechnologies.join(", ")}
 ]
 ML & Data Science: [
-Python, Jupyter, Matplotlib, 
-TensorFlow, PyTorch, scikit-learn
+${skills.mlDataScience.join(", ")}
 ]
-App Technologies: [React Native, SwiftUI]
+App Technologies: [${skills.appTechnologies.join(", ")}]
                 `}
-                </span>
-                <span className="hidden sm:block">{`
-Neon Terminal - version 1.0.0
-===========================
-User: adyuta
-Location: /home/adyuta/
-
-> system_info
-Operating System: [MacOS Tahoe, Endavour OS, Windows 11]
-Web Technologies: [
-React, Next.js, Tailwind CSS, Node.js, SASS,
-TypeScript, SQL, Supabase, Laravel, Webpack
-]
-ML & Data Science: [
-Python, Jupyter, Matplotlib, 
-TensorFlow, PyTorch, scikit-learn
-]
-App Technologies: [React Native, SwiftUI]
-                 `}</span>
               </pre>
             </div>
 
-            <div className="absolute -right-2 sm:-right-6 -top-2 sm:-top-6 rounded-lg border border-primary/40 bg-primary/15 glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-primary animate-float">
+            <div className="absolute -right-2 sm:-right-6 -top-2 sm:-top-6 rounded-lg border border-primary/40 bg-card px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-primary animate-float">
               <span className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
                 v0.1.0
               </span>
             </div>
             <div
-              className="absolute -bottom-3 sm:-bottom-6 -left-2 sm:-left-6 rounded-lg border border-border bg-card glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground animate-float"
+              className="absolute -bottom-3 sm:-bottom-6 -left-2 sm:-left-6 rounded-lg border border-border bg-card px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground animate-float"
               style={{ animationDelay: "1s" }}
             >
               Jan. 2026

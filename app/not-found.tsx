@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import { Illustration } from '@/components/atoms/illustration'
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-2xl text-center">
         <div className="mb-8">
+          <Illustration src="/not-found.svg" className="mx-auto mb-10 max-w-md" />
           <h1 className="text-9xl font-bold mb-4 font-mono relative">
             <span className="glitch inline-block">404</span>
           </h1>

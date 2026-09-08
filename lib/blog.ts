@@ -6,7 +6,6 @@ import html from "remark-html";
 import remarkGfm from "remark-gfm";
 import readingTime from "reading-time";
 
-// Path ke folder docs
 const docsDirectory = path.join(process.cwd(), "docs");
 
 export interface BlogPost {
