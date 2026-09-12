@@ -11,7 +11,7 @@ const HonorsAwardsItem: HonorAward[] = [
   {
     id: 12,
     title:
-      "2nd Place for Product Implementation, ICT Business Plan Competition KMIPN VIII 2026",
+      "2nd Place for Product Implementation, Business Plan Competition KMIPN VIII 2026",
     issuer: "KMIPN VIII 2026",
     date: "Sep 2026",
   },
