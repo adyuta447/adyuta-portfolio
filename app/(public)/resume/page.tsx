@@ -68,10 +68,10 @@ const resumeExperiences: Experience[] = experiences;
 
 const resumeOrganizations = organizations;
 
-// Resume-only trim: keep the outright wins and the one still-open 2026
-// semifinal; the rest (older semifinalist results and highschool-era
-// olympiad participations) stay on LinkedIn to keep this to 2 pages.
-const RESUME_HONOR_IDS = [1, 2, 3];
+// Resume-only trim: keep the outright wins; the rest (semifinalist results
+// and highschool-era olympiad participations) stay on LinkedIn to keep this
+// to 2 pages.
+const RESUME_HONOR_IDS = [1, 2, 12];
 const resumeHonors: HonorAward[] = RESUME_HONOR_IDS.map((id) =>
   honorsAwards.find((item) => item.id === id),
 )

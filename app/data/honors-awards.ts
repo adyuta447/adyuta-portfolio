@@ -11,8 +11,8 @@ const HonorsAwardsItem: HonorAward[] = [
   {
     id: 12,
     title:
-      "2nd Place for Product Implementation, Business Plan Competition KMIPN VIII 2026",
-    issuer: "KMIPN VIII 2026",
+      "2nd Place for Product Implementation, Business Plan Competition KMIPN 2026",
+    issuer: "Kompetisi Mahasiswa Informatika Politeknik Nasional VIII 2026",
     date: "Sep 2026",
   },
   {
@@ -33,13 +33,6 @@ const HonorsAwardsItem: HonorAward[] = [
     title: "Semifinalist in Hackathon x Digdaya Bank Indonesia 2026",
     issuer: "Bank Indonesia",
     date: "Aug 2026",
-  },
-  {
-    id: 3,
-    title:
-      "Semifinalist in International Business Case Competition Ganesha Festival 2026",
-    issuer: "Ganesha Festival ITB",
-    date: "May 2026",
   },
   {
     id: 4,
